@@ -1,6 +1,6 @@
 # Trajectory — call_05
 
-## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-29T23:54:39
+## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-30T00:01:54
 
 **Input**
 
@@ -15,41 +15,41 @@
 
 ```json
 {
-  "raw": "{\n  \"flags\": [\n    {\n      \"line\": 3,\n      \"quote\": \"I understand, but honestly, this one is completely safe, you can't lose money with it.\",\n      \"policy_id\": \"P-01\",\n      \"reasoning\": \"The agent states that the product is 'completely safe' and that the customer 'can't lose money,' implying guaranteed returns and freedom from loss.\",\n      \"severity\": \"medium\"\n    },\n    {\n      \"line\": 3,\n      \"quote\": \"I understand, but honestly, this one is completely safe, you can't lose money with it.\",\n      \"policy_id\": \"P-07\",\n      \"reasoning\": \"The agent describes a variable annuity as 'completely safe' and states the customer 'can't lose money,' which understates its risk level.\",\n      \"severity\": \"high\"\n    },\n    {\n      \"line\": 5,\n      \"quote\": \"Even then, it's designed to be risk-free for your principal.\",\n      \"policy_id\": \"P-01\",\n      \"reasoning\": \"The agent states the product is 'risk-free for your principal,' implying principal protection and freedom from loss.\",\n      \"severity\": \"medium\"\n    },\n    {\n      \"line\": 5,\n      \"quote\": \"Even then, it's designed to be risk-free for your principal.\",\n      \"policy_id\": \"P-07\",\n      \"reasoning\": \"The agent describes a variable annuity as 'risk-free for your principal,' which understates its risk level.\",\n      \"severity\": \"high\"\n    }\n  ]\n}",
+  "raw": "{\n  \"flags\": [\n    {\n      \"line\": 3,\n      \"quote\": \"I understand, but honestly, this one is completely safe, you can't lose money with it.\",\n      \"policy_id\": \"P-01\",\n      \"reasoning\": \"The agent states that the product is 'completely safe' and that the customer 'can't lose money with it,' which implies guaranteed returns and freedom from loss.\",\n      \"severity\": \"high\"\n    },\n    {\n      \"line\": 3,\n      \"quote\": \"I understand, but honestly, this one is completely safe, you can't lose money with it.\",\n      \"policy_id\": \"P-07\",\n      \"reasoning\": \"The agent describes a variable annuity as 'completely safe' and states 'you can't lose money with it,' which understates the risk level of a variable-return product.\",\n      \"severity\": \"high\"\n    },\n    {\n      \"line\": 5,\n      \"quote\": \"Even then, it's designed to be risk-free for your principal.\",\n      \"policy_id\": \"P-01\",\n      \"reasoning\": \"The agent states the product is 'risk-free for your principal,' which implies principal protection and freedom from loss.\",\n      \"severity\": \"high\"\n    },\n    {\n      \"line\": 5,\n      \"quote\": \"Even then, it's designed to be risk-free for your principal.\",\n      \"policy_id\": \"P-07\",\n      \"reasoning\": \"The agent describes a variable annuity as 'risk-free for your principal,' which understates the risk level of a variable-return product.\",\n      \"severity\": \"high\"\n    }\n  ]\n}",
   "flags": [
     {
       "line": 3,
       "quote": "I understand, but honestly, this one is completely safe, you can't lose money with it.",
       "policy_id": "P-01",
-      "reasoning": "The agent states that the product is 'completely safe' and that the customer 'can't lose money,' implying guaranteed returns and freedom from loss.",
-      "severity": "medium"
+      "reasoning": "The agent states that the product is 'completely safe' and that the customer 'can't lose money with it,' which implies guaranteed returns and freedom from loss.",
+      "severity": "high"
     },
     {
       "line": 3,
       "quote": "I understand, but honestly, this one is completely safe, you can't lose money with it.",
       "policy_id": "P-07",
-      "reasoning": "The agent describes a variable annuity as 'completely safe' and states the customer 'can't lose money,' which understates its risk level.",
+      "reasoning": "The agent describes a variable annuity as 'completely safe' and states 'you can't lose money with it,' which understates the risk level of a variable-return product.",
       "severity": "high"
     },
     {
       "line": 5,
       "quote": "Even then, it's designed to be risk-free for your principal.",
       "policy_id": "P-01",
-      "reasoning": "The agent states the product is 'risk-free for your principal,' implying principal protection and freedom from loss.",
-      "severity": "medium"
+      "reasoning": "The agent states the product is 'risk-free for your principal,' which implies principal protection and freedom from loss.",
+      "severity": "high"
     },
     {
       "line": 5,
       "quote": "Even then, it's designed to be risk-free for your principal.",
       "policy_id": "P-07",
-      "reasoning": "The agent describes a variable annuity as 'risk-free for your principal,' which understates its risk level.",
+      "reasoning": "The agent describes a variable annuity as 'risk-free for your principal,' which understates the risk level of a variable-return product.",
       "severity": "high"
     }
   ]
 }
 ```
 
-## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:54:40
+## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T00:01:55
 
 **Input**
 
@@ -64,13 +64,13 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent explicitly tells the customer that the product is completely safe and that they cannot lose money, which directly violates the rule prohibiting guarantees against loss.\"\n}",
+  "raw": "{\n  \"verdict\": \"yes\",\n  \"hustification\": \"The agent explicitly states that the product is completely safe and that the customer cannot lose money, which directly violates the rule against implying freedom from loss or guaranteed principal.\"\n}",
   "verdict": "yes",
-  "justification": "The agent explicitly tells the customer that the product is completely safe and that they cannot lose money, which directly violates the rule prohibiting guarantees against loss."
+  "justification": ""
 }
 ```
 
-## 3. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:54:41
+## 3. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T00:01:56
 
 **Input**
 
@@ -85,13 +85,13 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"yes\",\n  \"mathrm\": \"The agent explicitly describes a financial product as completely safe and states that the user cannot lose money, directly violating the prohibition against understating investment risk or calling a variable product risk-free.\"\n}",
+  "raw": "{\n  \"verdict\": \"yes\",\n  \"mathrm\": \"The agent explicitly describes the investment product as 'completely safe' and states that 'you can't lose money with it,' which directly violates the rule against describing a variable-return product as safe or risk-free.\"\n}",
   "verdict": "yes",
   "justification": ""
 }
 ```
 
-## 4. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:54:42
+## 4. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T00:01:57
 
 **Input**
 
@@ -112,7 +112,7 @@
 }
 ```
 
-## 5. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:54:43
+## 5. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T00:01:58
 
 **Input**
 
@@ -127,8 +127,8 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"yes\",\n  \"label\": \"violation\",\n  \"justification\": \"The agent explicitly describes the investment product as 'risk-free,' which directly violates the rule prohibiting the description of an investment as risk-free.\"\n}",
+  "raw": "{\n  \"verdict\": \"yes\",\n  \"intent\": \"policy_check\",\n  \"justification\": \"The agent explicitly describes the investment product as 'risk-free', which directly violates the policy rule prohibiting describing any product as risk-free.\"\n}",
   "verdict": "yes",
-  "justification": "The agent explicitly describes the investment product as 'risk-free,' which directly violates the rule prohibiting the description of an investment as risk-free."
+  "justification": "The agent explicitly describes the investment product as 'risk-free', which directly violates the policy rule prohibiting describing any product as risk-free."
 }
 ```

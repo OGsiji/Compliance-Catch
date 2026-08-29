@@ -1,6 +1,6 @@
 # Trajectory — call_08
 
-## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-29T23:55:08
+## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-30T00:02:24
 
 **Input**
 
@@ -49,7 +49,7 @@
 }
 ```
 
-## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:55:09
+## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T00:02:24
 
 **Input**
 
@@ -64,13 +64,13 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"yes\",\n  \"policy\": \"P-12\",\n  \"justification\": \"The agent attempted an upsell immediately after the customer disclosed a difficult circumstance, violating the requirement to avoid upselling.\"\n}",
+  "raw": "{\n  \"verdict\": \"yes\",\n  \"policy\": \"P-12\",\n  \"justification\": \"The agent attempted an upsell immediately after the customer disclosed a difficult circumstance.\"\n}",
   "verdict": "yes",
-  "justification": "The agent attempted an upsell immediately after the customer disclosed a difficult circumstance, violating the requirement to avoid upselling."
+  "justification": "The agent attempted an upsell immediately after the customer disclosed a difficult circumstance."
 }
 ```
 
-## 3. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:55:10
+## 3. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T00:02:25
 
 **Input**
 
@@ -85,13 +85,13 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The agent transitions to a sales pitch using standard conversational framing without creating false urgency or pressure for an immediate decision.\"\n}",
+  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The agent transitions to a sales pitch using standard conversational framing rather than manufacturing artificial urgency or pressure for an immediate decision.\"\n}",
   "verdict": "no",
-  "justification": "The agent transitions to a sales pitch using standard conversational framing without creating false urgency or pressure for an immediate decision."
+  "justification": "The agent transitions to a sales pitch using standard conversational framing rather than manufacturing artificial urgency or pressure for an immediate decision."
 }
 ```
 
-## 4. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:55:11
+## 4. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T00:02:26
 
 **Input**
 
@@ -106,13 +106,13 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The line simply confirms the setup of a request without any indication that the customer disclosed a vulnerability.\"\n}",
+  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The provided transcript line merely confirms setting up a request and does not involve any disclosure of vulnerability by the customer.\"\n}",
   "verdict": "no",
-  "justification": "The line simply confirms the setup of a request without any indication that the customer disclosed a vulnerability."
+  "justification": "The provided transcript line merely confirms setting up a request and does not involve any disclosure of vulnerability by the customer."
 }
 ```
 
-## 5. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:55:12
+## 5. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T00:02:27
 
 **Input**
 
@@ -127,8 +127,8 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The line merely indicates the agent is setting up what was requested and does not show enrollment in an unrequested product without consent.\"\n}",
+  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The line merely indicates the agent is setting up the requested product and does not show an enrollment or upgrade into an unrequested product without consent.\"\n}",
   "verdict": "no",
-  "justification": "The line merely indicates the agent is setting up what was requested and does not show enrollment in an unrequested product without consent."
+  "justification": "The line merely indicates the agent is setting up the requested product and does not show an enrollment or upgrade into an unrequested product without consent."
 }
 ```

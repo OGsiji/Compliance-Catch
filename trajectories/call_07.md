@@ -1,6 +1,6 @@
 # Trajectory — call_07
 
-## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-29T23:54:57
+## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-30T00:02:12
 
 **Input**
 
@@ -28,7 +28,7 @@
 }
 ```
 
-## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:54:57
+## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T00:02:13
 
 **Input**
 
@@ -43,8 +43,8 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent explicitly recommends a financial product based on the customer's age, which violates the prohibition against referencing or implying differential treatment based on age.\"\n}",
+  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent explicitly recommends a financial product based directly on the customer's age, violating the rule against differential treatment based on age.\"\n}",
   "verdict": "yes",
-  "justification": "The agent explicitly recommends a financial product based on the customer's age, which violates the prohibition against referencing or implying differential treatment based on age."
+  "justification": "The agent explicitly recommends a financial product based directly on the customer's age, violating the rule against differential treatment based on age."
 }
 ```

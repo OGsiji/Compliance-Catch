@@ -39,6 +39,23 @@
       "needs_review": 0,
       "coverage_pct": 100.0
     },
+    "flagger_only": {
+      "tp": 8,
+      "fp_per_call": 5,
+      "fn": 0,
+      "tn": 1,
+      "precision_per_call": 0.615,
+      "recall_per_call": 1.0,
+      "tp_strict": 8,
+      "fp_strict_line_and_rule": 12,
+      "fn_strict": 0,
+      "precision_strict_line_and_rule": 0.4,
+      "recall_strict_line_and_rule": 1.0,
+      "reviewed": 10,
+      "total": 10,
+      "needs_review": 0,
+      "coverage_pct": 100.0
+    },
     "agent": {
       "tp": 8,
       "fp_per_call": 2,
@@ -53,9 +70,13 @@
       "recall_strict_line_and_rule": 1.0,
       "reviewed": 10,
       "total": 10,
-      "needs_review": 6,
+      "needs_review": 5,
       "coverage_pct": 100.0
     }
+  },
+  "flagger_only_diagnostic": {
+    "total_candidate_flags": 20,
+    "quote_check_failures": 0
   },
   "per_call": {
     "call_01": {
@@ -70,6 +91,12 @@
         "policy_ids": []
       },
       "keyword": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-01"
+        ]
+      },
+      "flagger_only": {
         "reviewed": true,
         "policy_ids": [
           "P-01"
@@ -94,6 +121,10 @@
         "reviewed": true,
         "policy_ids": []
       },
+      "flagger_only": {
+        "reviewed": true,
+        "policy_ids": []
+      },
       "agent": {
         "reviewed": true,
         "policy_ids": []
@@ -114,6 +145,12 @@
         "reviewed": true,
         "policy_ids": []
       },
+      "flagger_only": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-03"
+        ]
+      },
       "agent": {
         "reviewed": true,
         "policy_ids": [
@@ -133,6 +170,12 @@
         "policy_ids": []
       },
       "keyword": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-04"
+        ]
+      },
+      "flagger_only": {
         "reviewed": true,
         "policy_ids": [
           "P-04"
@@ -162,6 +205,13 @@
           "P-07"
         ]
       },
+      "flagger_only": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-01",
+          "P-07"
+        ]
+      },
       "agent": {
         "reviewed": true,
         "policy_ids": [
@@ -184,6 +234,13 @@
       "keyword": {
         "reviewed": true,
         "policy_ids": [
+          "P-08"
+        ]
+      },
+      "flagger_only": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-02",
           "P-08"
         ]
       },
@@ -212,6 +269,12 @@
           "P-08"
         ]
       },
+      "flagger_only": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-06"
+        ]
+      },
       "agent": {
         "reviewed": true,
         "policy_ids": [
@@ -236,6 +299,14 @@
           "P-04"
         ]
       },
+      "flagger_only": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-04",
+          "P-08",
+          "P-12"
+        ]
+      },
       "agent": {
         "reviewed": true,
         "policy_ids": [
@@ -252,6 +323,13 @@
         "policy_ids": []
       },
       "keyword": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-01",
+          "P-04"
+        ]
+      },
+      "flagger_only": {
         "reviewed": true,
         "policy_ids": [
           "P-01",
@@ -277,6 +355,13 @@
       "keyword": {
         "reviewed": true,
         "policy_ids": []
+      },
+      "flagger_only": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-01",
+          "P-07"
+        ]
       },
       "agent": {
         "reviewed": true,

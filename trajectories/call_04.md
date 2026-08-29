@@ -1,6 +1,6 @@
 # Trajectory — call_04
 
-## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-29T23:54:31
+## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-30T00:01:49
 
 **Input**
 
@@ -28,7 +28,7 @@
 }
 ```
 
-## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:54:32
+## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T00:01:50
 
 **Input**
 
@@ -43,8 +43,8 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent creates artificial urgency by claiming the rate is only available if signed up within the next 3 minutes due to an impending call.\"\n}",
+  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent creates artificial urgency by claiming the rate is only available if signed up within three minutes due to a waiting call.\"\n}",
   "verdict": "yes",
-  "justification": "The agent creates artificial urgency by claiming the rate is only available if signed up within the next 3 minutes due to an impending call."
+  "justification": "The agent creates artificial urgency by claiming the rate is only available if signed up within three minutes due to a waiting call."
 }
 ```

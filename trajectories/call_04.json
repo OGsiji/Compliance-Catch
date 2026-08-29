@@ -1,6 +1,6 @@
 [
   {
-    "timestamp": "2026-08-29T23:54:31",
+    "timestamp": "2026-08-30T00:01:49",
     "stage": "flagger",
     "model": "gemini-2.5-flash",
     "input": {
@@ -21,7 +21,7 @@
     }
   },
   {
-    "timestamp": "2026-08-29T23:54:32",
+    "timestamp": "2026-08-30T00:01:50",
     "stage": "verifier:recheck",
     "model": "gemini-flash-lite-latest",
     "input": {
@@ -29,9 +29,9 @@
       "user": "Line: \"4.9%, but I should mention, this rate is only available if you sign up in the next 3 minutes, I have another call waiting after this.\"\nPolicy rule P-04: \"Agents must not use artificial urgency to pressure a customer into an immediate decision on a financial product.\"\n"
     },
     "output": {
-      "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent creates artificial urgency by claiming the rate is only available if signed up within the next 3 minutes due to an impending call.\"\n}",
+      "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent creates artificial urgency by claiming the rate is only available if signed up within three minutes due to a waiting call.\"\n}",
       "verdict": "yes",
-      "justification": "The agent creates artificial urgency by claiming the rate is only available if signed up within the next 3 minutes due to an impending call."
+      "justification": "The agent creates artificial urgency by claiming the rate is only available if signed up within three minutes due to a waiting call."
     }
   }
 ]

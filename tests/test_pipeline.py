@@ -53,6 +53,23 @@ class DualConventionScoring(unittest.TestCase):
         self.assertNotIn("precision", s)
 
 
+class FlaggerOnlyBaseline(unittest.TestCase):
+    """The flagger-only ablation (no verifier) runs and reports its diagnostic."""
+
+    def test_offline_flagger_only_runs_and_reports_diagnostic(self):
+        from eval.run_eval import flagger_only_predictions, score
+        ts = load_all_transcripts(); pol = load_policy(); gt = load_ground_truth()
+        preds, diag = flagger_only_predictions(ts, pol, "offline")
+        self.assertEqual(len(preds), 10)
+        self.assertIn("total_candidate_flags", diag)
+        self.assertIn("quote_check_failures", diag)
+        self.assertTrue(all("grounded" in p for p in preds.values()))
+        # the offline flagger copies line text verbatim -> nothing fails step 1
+        self.assertEqual(diag["quote_check_failures"], 0)
+        # unverified candidates still catch every violation (recall 1.0)
+        self.assertEqual(score(preds, gt)["recall_per_call"], 1.0)
+
+
 class OfflineReproducesGroundTruth(unittest.TestCase):
     def test_every_fixture_matches_ground_truth(self):
         transcripts = load_all_transcripts()

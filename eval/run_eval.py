@@ -23,7 +23,7 @@ from typing import Dict, List, Set
 
 from agent.flagger import Flagger
 from agent.pipeline import run_pipeline
-from agent.verifier import Verifier
+from agent.verifier import Verifier, quote_matches
 from baseline import random_sample
 from baseline.keyword_match import keyword_flags
 from core.data import (REPO_ROOT, load_all_transcripts, load_ground_truth,
@@ -147,6 +147,44 @@ def keyword_predictions(transcripts) -> Dict[str, dict]:
     return preds
 
 
+def flagger_only_predictions(transcripts, policy, provider):
+    """Ablation baseline: the flagger alone, with NO verifier — every candidate
+    flag is reported as-is, unverified. Isolates what the verifier's grounding
+    step actually contributes.
+
+    Calls the existing Flagger and skips the verifier entirely (flagger.py /
+    verifier.py / router.py are untouched). Traces are not persisted so this
+    never clobbers the committed Gemini /trajectories. Also counts how many raw
+    flags would fail the programmatic quote check — what grounding step 1 catches.
+    """
+    from core.models import Transcript  # local import; typing only
+    client = make_client(provider)
+    logger = TrajectoryLogger(enabled=False)
+    flagger = Flagger(client, logger)
+    preds: Dict[str, dict] = {}
+    total_flags = 0
+    quote_check_failures = 0
+    for t in transcripts:
+        try:
+            flags = flagger.run(t, policy)
+        except Exception as exc:  # noqa: BLE001
+            print(f"[eval] flagger-only {t.id}: error, marking unreviewed -> {exc}")
+            preds[t.id] = {"reviewed": False, "policy_ids": set(), "grounded": [],
+                           "needs_review": 0}
+            continue
+        total_flags += len(flags)
+        quote_check_failures += sum(1 for f in flags if not quote_matches(t, f))
+        preds[t.id] = {
+            "reviewed": True,
+            "policy_ids": {f.policy_id for f in flags},
+            "grounded": sorted((f.line, f.policy_id) for f in flags),
+            "needs_review": 0,
+        }
+    diagnostic = {"total_candidate_flags": total_flags,
+                  "quote_check_failures": quote_check_failures}
+    return preds, diagnostic
+
+
 def random_predictions(transcripts) -> Dict[str, dict]:
     reviewed = random_sample.review(transcripts)
     preds: Dict[str, dict] = {}
@@ -174,36 +212,48 @@ ROWS = [
 ]
 
 
-def render_table(scores: Dict[str, dict], provider: str, models: dict = None) -> str:
+# Columns, left to right: baselines, then the ablation, then the full system.
+SYSTEMS = [
+    ("Random 5%", "random"),
+    ("Keyword match", "keyword"),
+    ("Flagger only (no verifier)", "flagger_only"),
+    ("Agent (full)", "agent"),
+]
+
+
+def render_table(scores: Dict[str, dict], provider: str, models: dict = None,
+                 flagger_only_diag: dict = None) -> str:
     def cell(sysname, key, unit):
-        v = scores[sysname].get(key, 0)
+        v = scores.get(sysname, {}).get(key, 0)
         return f"{v}{unit}"
 
     model_line = ""
     if models:
         model_line = (f" · models: flagger `{models.get('flagger')}`, "
                       f"verifier `{models.get('verifier')}`")
+    header = "| Metric | " + " | ".join(h for h, _ in SYSTEMS) + " |"
+    sep = "|" + "---|" * (len(SYSTEMS) + 1)
     lines = [
         f"# Compliance Catch — eval results (agent provider: `{provider}`)",
         "",
         f"_Generated {_dt.datetime.now().isoformat(timespec='seconds')} · "
         f"{scores['agent']['total']} fixtures{model_line}_",
         "",
-        "| Metric | Random 5% | Keyword match | Agent | Δ (keyword → agent) |",
-        "|---|---|---|---|---|",
+        header,
+        sep,
     ]
     for label, key, unit in ROWS:
-        kw = scores["keyword"].get(key, 0)
-        ag = scores["agent"].get(key, 0)
-        if isinstance(kw, (int, float)) and isinstance(ag, (int, float)):
-            delta = round(ag - kw, 3)
-            delta_s = f"{'+' if delta > 0 else ''}{delta}{unit}"
-        else:
-            delta_s = "—"
-        lines.append(
-            f"| {label} | {cell('random', key, unit)} | {cell('keyword', key, unit)} "
-            f"| {cell('agent', key, unit)} | {delta_s} |"
-        )
+        row = f"| {label} | " + " | ".join(cell(k, key, unit) for _, k in SYSTEMS) + " |"
+        lines.append(row)
+
+    diag = ""
+    if flagger_only_diag:
+        n = flagger_only_diag.get("total_candidate_flags", 0)
+        q = flagger_only_diag.get("quote_check_failures", 0)
+        pct = round(100 * q / n) if n else 0
+        diag = (f" The flagger alone produced {n} candidate flags; {q} ({pct}%) "
+                "fail the verbatim quote check — exactly what the verifier's "
+                "grounding step 1 removes before anything is reported.")
     lines += [
         "",
         "**Headline:** the keyword baseline flags the external-deadline near-miss "
@@ -211,7 +261,7 @@ def render_table(scores: Dict[str, dict], provider: str, models: dict = None) ->
         "the agent reviews 100% of calls with recall 1.0. Precision is shown under "
         "both conventions — per-call (line ignored) and strict (line + rule); the "
         "gap is the multi-rule/multi-line flags on call_05 and call_10 that the "
-        "single-label ground truth cannot credit (see the README Hot Take).",
+        "single-label ground truth cannot credit (see the README Hot Take)." + diag,
         "",
     ]
     return "\n".join(lines)
@@ -284,9 +334,11 @@ def main(argv=None) -> int:
     ground_truth = load_ground_truth()
 
     agent_preds, provider, models = agent_predictions(transcripts, policy, policy_idx, args.provider)
+    flagger_only_preds, flagger_only_diag = flagger_only_predictions(transcripts, policy, args.provider)
     all_preds = {
         "random": random_predictions(transcripts),
         "keyword": keyword_predictions(transcripts),
+        "flagger_only": flagger_only_preds,
         "agent": agent_preds,
     }
     scores = {name: score(p, ground_truth) for name, p in all_preds.items()}
@@ -302,7 +354,7 @@ def main(argv=None) -> int:
                 "policy_ids": sorted(info.get("policy_ids", set())),
             }
 
-    table = render_table(scores, provider, models)
+    table = render_table(scores, provider, models, flagger_only_diag)
     print(table)
 
     os.makedirs(RESULTS_DIR, exist_ok=True)
@@ -311,7 +363,8 @@ def main(argv=None) -> int:
     with open(md_path, "w", encoding="utf-8") as fh:
         fh.write(table)
     with open(json_path, "w", encoding="utf-8") as fh:
-        json.dump({"provider": provider, "models": models, "scores": scores, "per_call": per_call},
+        json.dump({"provider": provider, "models": models, "scores": scores,
+                   "flagger_only_diagnostic": flagger_only_diag, "per_call": per_call},
                   fh, indent=2)
 
     # Post-processing: recurring-pattern aggregation over the grounded flags.

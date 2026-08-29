@@ -1,6 +1,6 @@
 # Trajectory — call_09
 
-## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-29T23:55:16
+## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-30T00:02:31
 
 **Input**
 
@@ -15,48 +15,20 @@
 
 ```json
 {
-  "raw": "{\n  \"flags\": [\n    {\n      \"line\": 3,\n      \"quote\": \"Sure, just so you know, the Fed rate resets at midnight tonight, that's not something I control, so the current rate is only guaranteed if we finalize before then.\",\n      \"policy_id\": \"P-01\",\n      \"reasoning\": \"The agent states that the current rate is 'guaranteed' if finalized before a certain time, which implies a guaranteed return.\",\n      \"severity\": \"medium\"\n    },\n    {\n      \"line\": 3,\n      \"quote\": \"Sure, just so you know, the Fed rate resets at midnight tonight, that's not something I control, so the current rate is only guaranteed if we finalize before then.\",\n      \"policy_id\": \"P-04\",\n      \"reasoning\": \"The agent creates artificial urgency by stating the rate resets at midnight and is only guaranteed if finalized before then, pressuring the customer into an immediate decision.\",\n      \"severity\": \"medium\"\n    }\n  ]\n}",
+  "raw": "{\n  \"flags\": [\n    {\n      \"line\": 3,\n      \"quote\": \"Sure, just so you know, the Fed rate resets at midnight tonight, that's not something I control, so the current rate is only guaranteed if we finalize before then.\",\n      \"policy_id\": \"P-04\",\n      \"reasoning\": \"The agent uses the impending rate change and the limited-time guarantee to pressure the customer into making an immediate decision.\",\n      \"severity\": \"medium\"\n    }\n  ]\n}",
   "flags": [
     {
       "line": 3,
       "quote": "Sure, just so you know, the Fed rate resets at midnight tonight, that's not something I control, so the current rate is only guaranteed if we finalize before then.",
-      "policy_id": "P-01",
-      "reasoning": "The agent states that the current rate is 'guaranteed' if finalized before a certain time, which implies a guaranteed return.",
-      "severity": "medium"
-    },
-    {
-      "line": 3,
-      "quote": "Sure, just so you know, the Fed rate resets at midnight tonight, that's not something I control, so the current rate is only guaranteed if we finalize before then.",
       "policy_id": "P-04",
-      "reasoning": "The agent creates artificial urgency by stating the rate resets at midnight and is only guaranteed if finalized before then, pressuring the customer into an immediate decision.",
+      "reasoning": "The agent uses the impending rate change and the limited-time guarantee to pressure the customer into making an immediate decision.",
       "severity": "medium"
     }
   ]
 }
 ```
 
-## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:55:17
-
-**Input**
-
-```
-{
-  "system": "You are checking a single flagged compliance issue. You will be given\nexactly one line from a call transcript and the text of exactly one\npolicy rule — nothing else.\n\nQuestion: does this line, on its own, violate this specific rule?\nConsider both explicit and clearly implied violations — for example, a\nstrong implied guarantee counts even without the word \"guarantee.\"\nHowever, if the line itself shows the constraint is a genuine external\ndeadline outside the agent's control (e.g. \"the rate resets at midnight,\nthat's not something I control\") rather than pressure the agent is\nmanufacturing, that is not a high-pressure violation — answer no.\nAnswer with:\n- verdict: yes or no\n- justification: one sentence\n\nOutput valid JSON only: a JSON object with keys \"verdict\" and \"justification\".",
-  "user": "Line: \"Sure, just so you know, the Fed rate resets at midnight tonight, that's not something I control, so the current rate is only guaranteed if we finalize before then.\"\nPolicy rule P-01: \"Agents must not state or imply that any account, investment, or product will guarantee returns, gains, principal protection, or freedom from loss.\"\n"
-}
-```
-
-**Output**
-
-```json
-{
-  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The statement refers to an external deadline regarding a rate reset outside the agent's control rather than guaranteeing an investment return or principal protection.\"\n}",
-  "verdict": "no",
-  "justification": "The statement refers to an external deadline regarding a rate reset outside the agent's control rather than guaranteeing an investment return or principal protection."
-}
-```
-
-## 3. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:55:18
+## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T00:02:31
 
 **Input**
 
@@ -71,8 +43,8 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The agent is citing a genuine external deadline regarding the Federal Reserve rate that is outside of their control, which is explicitly exempted.\"\n}",
+  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The agent is citing a genuine external market deadline outside of their control rather than manufacturing artificial urgency.\"\n}",
   "verdict": "no",
-  "justification": "The agent is citing a genuine external deadline regarding the Federal Reserve rate that is outside of their control, which is explicitly exempted."
+  "justification": "The agent is citing a genuine external market deadline outside of their control rather than manufacturing artificial urgency."
 }
 ```

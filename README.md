@@ -90,18 +90,27 @@ changed as a result:
 ## Evaluation results
 
 The system scored as "the agent" is the **real Gemini pipeline**. Its measured
-numbers against the two baselines over the same 10 held-out fixtures:
+numbers against the two baselines and a flagger-only ablation, over the same 10
+held-out fixtures:
 
-| Metric | Random 5% | Keyword match | **Gemini agent** |
-| --- | --- | --- | --- |
-| Coverage (% reviewed) | 10% | 100% | **100%** |
-| Violations caught (TP) | 0 / 8 | 5 / 8 | **8 / 8** |
-| Recall | 0.0 | 0.625 | **1.0** |
-| Precision — per-call | 0.0 | 0.625 | **0.8** |
-| Precision — strict (line + rule) | 0.0 | 0.455 | **0.571** |
+| Metric | Random 5% | Keyword match | Flagger only (no verifier) | **Gemini agent (full)** |
+| --- | --- | --- | --- | --- |
+| Coverage (% reviewed) | 10% | 100% | 100% | **100%** |
+| Violations caught (TP) | 0 / 8 | 5 / 8 | 8 / 8 | **8 / 8** |
+| Recall | 0.0 | 0.625 | 1.0 | **1.0** |
+| Precision — per-call | 0.0 | 0.625 | 0.615 | **0.8** |
+| Precision — strict (line + rule) | 0.0 | 0.455 | 0.4 | **0.571** |
+
+**What the verifier buys (flagger-only ablation).** Running the flagger with no
+verifier keeps recall at 1.0 but drops precision to 0.615 / 0.4 — the scoped
+re-check is what raises it to 0.8 / 0.571, by routing 5 over-eager candidates to
+*needs review*. On this run, **0 of the flagger's 20 candidate flags failed the
+verbatim quote check**: the quote check is a safety net against hallucinated
+citations, not the active filter here — the precision gain came from the scoped
+policy re-check (step 2), not step 1.
 
 Every number above is emitted by `make eval` into
-[`eval/results/results_gemini.json`](eval/results/results_gemini.json) under two
+`eval/results/results_gemini.json` under two
 explicit conventions — `precision_per_call` and `precision_strict_line_and_rule`
 — so nothing here is hand-computed. **Recall is 1.0 — the agent missed nothing.**
 Precision is **0.571 under strict line-and-rule scoring** (a flag counts only if
@@ -301,4 +310,4 @@ capability demo, not a robustness claim — see [Known limitations](#known-limit
 for exactly what was and wasn't tested.
 
 The exact instructions handed to each agent stage — the flagger and verifier
-prompts, disclosed verbatim — live in [`core/prompts.py`](core/prompts.py).
+prompts, disclosed verbatim — live in `core/prompts.py`.
