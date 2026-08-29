@@ -6,3 +6,6 @@ venv/
 .DS_Store
 data/audio/.*.mp3
 eval/results/_*.log
+
+# Local, ephemeral external-dataset validation — never commit real call data
+_local_extval/
