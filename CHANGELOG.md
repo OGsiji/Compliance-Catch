@@ -98,6 +98,6 @@
 ### The hard case (call_10) and what it revealed
 The implied-guarantee case ("nobody's ever lost money") has no keyword to match,
 so it exposed the real design lesson: reliability came from **grounding**, not
-model size. The free programmatic quote check plus a deliberately narrow re-check
-(one line, one rule) is what let the agent hit 1.0 precision while the keyword
-baseline sat at 0.63 — the basis for the README hot take.
+model size. (A later flagger-only ablation refined this — the two grounding steps
+do different jobs: the quote check guarantees integrity while the scoped re-check
+does the precision-lifting judgment; see the README Hot Take.)

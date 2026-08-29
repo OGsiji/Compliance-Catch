@@ -142,11 +142,17 @@ score is expected and is not evidence of any general capability.
 
 ## Hot take
 
-The single most valuable component is **free**: the plain-Python quote check.
-Most of the reliability gain over the keyword baseline comes not from a bigger
-model but from *forcing every claim to cite a verbatim line and one specific
-rule*, then throwing away anything that can't survive that grounding. Cheap
-verification beats confident generation.
+**Finding — integrity vs. judgment.** The two verification steps do different
+jobs, and the flagger-only ablation shows which one moved this run's numbers. The quote check (step 1) caught 0 of 20 candidate flags this run —
+every flag the flagger proposed was verbatim and real, so nothing needed
+rejecting on integrity grounds. The measured precision gain (0.615 → 0.8
+per-call, 0.4 → 0.571 strict) came entirely from the scoped policy re-check
+(step 2), which routed 5 over-eager candidates to needs-review. That doesn't make
+the quote check pointless — it's a cheap, unconditional guarantee against a
+hallucinated citation ever reaching a human reviewer, and it simply had nothing
+to catch on this particular run. The two steps check different things: integrity
+(is this quote real) versus judgment (does it actually violate the rule) — and on
+this run, judgment was where the errors were.
 
 **Finding — the answer key is coarser than reality.** Calls 05 and 10 were each
 written with a second line reinforcing the labeled violation, and ground truth
