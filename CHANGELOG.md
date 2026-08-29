@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.3.0 — honest positioning + tooling
+
+### Changed
+- **Gemini is the only reported result.** README/REPRODUCTION restructured so the
+  offline mode is described purely as a deterministic smoke test (fixture-fitted;
+  its pattern list contains literal transcript phrases), removed from any results
+  table, and never compared against Gemini.
+- **Precision reported honestly as a range.** Line-aware strict scoring gives the
+  Gemini agent precision **0.571** (0.80 per-call), recall **1.0**. The gap is
+  fully explained: on call_05/call_10 the agent grounds extra *real* violations
+  (a second line and a second overlapping rule) that the single-label ground
+  truth doesn't credit — see the README Hot take. Scoring logic and
+  `ground_truth.json` were left unchanged; only the explanation was added.
+
+### Added
+- **Makefile** — thin wrappers (`setup`, `baseline`, `agent`, `eval`, `test`,
+  `clean`) over the documented commands; no logic changes to baseline/agent/eval.
+- **README "Known limitations"** — concrete, audio-specific scope statements
+  (clean-TTS-only, two-speaker-only, omission violations out of scope by design,
+  PII/data-governance, free-tier throughput).
+
 ## 0.2.0 — real Gemini integration + audio verified
 
 ### Added
