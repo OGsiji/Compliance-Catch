@@ -9,3 +9,8 @@ eval/results/_*.log
 
 # Local, ephemeral external-dataset validation — never commit real call data
 _local_extval/
+
+# Real external-dataset call data must never be committed (kept out of the repo)
+support_billing/
+*customer_support*/
+*.docx

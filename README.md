@@ -157,12 +157,20 @@ Specific to what was and wasn't tested — not general hedging.
   validated only on synthetic text-to-speech audio. Real telephony audio is
   compressed and narrowband, with background noise, crosstalk, and accents that
   TTS never produces. Transcription accuracy on real call audio has **not** been
-  tested and must not be inferred from the clean-TTS result.
+  formally measured against reference transcripts (a small qualitative check is
+  noted under *External validation sources* below) and must not be inferred from
+  the clean-TTS result.
 - **Only clean two-speaker turn-taking was exercised.** The test audio had
   exactly two speakers alternating cleanly. Real calls can include a third party
   joining, hold/transfer hand-offs, an IVR voice, or overlapping speech — none
   of which was tested. Speaker diarization (labeling Agent vs Customer) is
   expected to degrade under any of these.
+- **Non-pre-formatted transcripts need a speaker-attribution step.** Converting a
+  real, timestamped transcript (continuous dialogue, not labeled per turn) into
+  the pipeline's schema requires an interpretive Agent-vs-Customer attribution
+  step that the audio path and the original 10 fixtures do not. Mis-attributed
+  labels are a labeling-accuracy risk specific to real-world, non-pre-formatted
+  transcripts — distinct from any error in the flagger or verifier itself.
 - **Violations by omission are out of scope by design.** The flagger can only
   flag a line it can quote. A whole class of real compliance failures are
   *omissions* — a required disclosure never made, an identity check skipped, a
@@ -178,6 +186,19 @@ Specific to what was and wasn't tested — not general hedging.
   orders of magnitude below real call volume. Production would require paid
   throughput, request queuing, and active cost management — none of which this
   build addresses.
+
+### External validation sources
+
+- **Dataset:** AxonData/english-contact-center-audio-dataset
+- **Publisher:** AxonLabs
+- **URL:** <https://huggingface.co/datasets/AxonData/english-contact-center-audio-dataset>
+- **License:** CC BY-NC 4.0 (<https://creativecommons.org/licenses/by-nc/4.0/>)
+- **What was done:** 2 call clips were run locally through `agent/transcribe.py`
+  and the full flag → verify → route pipeline, as qualitative validation only —
+  **not** part of the scored 10-fixture eval.
+- **What was NOT done:** no audio files, transcripts, or excerpts from this
+  dataset were redistributed or committed to this repository; no specific call is
+  identified or referenced by content — only the dataset as a whole.
 
 ## What pre-existed vs. what's new this weekend
 
