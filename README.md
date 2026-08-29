@@ -88,10 +88,10 @@ changed as a result:
 | Stage | What you tried and why | Evidence | Decision / Learning |
 | --- | --- | --- | --- |
 | **Baselines + fixtures** | Build 10 fixtures + held-out ground truth, then the two baselines, to quantify the gap before any agent. | Keyword: 5/8 caught, 3 false positives. Random 5%: 1/10 calls reviewed. | Bar set: 100% coverage is the prize; keyword's false alarms are the quality gap to beat. |
-| **Offline smoke test** | Deterministic pattern-matcher so the whole flag→verify→route→score path runs with no key. | Pipeline runs end to end; 9 tests pass with zero credentials. | Keep it as CI/plumbing only — its pattern list is fitted to the fixtures, so its score is not a result. |
+| **Offline smoke test** | Deterministic pattern-matcher so the whole flag→verify→route→score path runs with no key. | Pipeline runs end to end; 11 tests pass with zero credentials. | Keep it as CI/plumbing only — its pattern list is fitted to the fixtures, so its score is not a result. |
 | **First Gemini run** | Wire the real model and run the full eval. | Hit `429`/`503` on the free tier; 2 calls dropped, coverage fell to 80%. | Added retry-with-backoff (honoring the server's delay) + per-call isolation; moved the flagger to `gemini-2.5-flash` for a larger free quota. |
 | **Precision audit** | Suspicious that "2 false positives" was too clean, audited every grounded flag line-by-line. | The harness's per-call convention reported 2 FPs (precision 0.80); a line-aware count found **6** real extra flags (0.571) — the convention was hiding 4. | Report precision as a range and lead with the strict 0.571; save per-call detail for audit. |
-| **Ground-truth finding** | Read the actual reasoning behind the extra flags on call_05/call_10. | All extra flags are verbatim, quote-checked lines; both clean calls flagged nothing. | It's the answer key under-labeling real violations, not the agent over-flagging (see Hot take). Future work: multi-label ground truth. |
+| **Ground-truth finding** | Read the actual reasoning behind the extra flags on call_05/call_10. | All extra flags are verbatim, quote-checked lines; both clean calls flagged nothing. | These are additional defensible policy interpretations not represented by the single-label ground truth, not the agent over-flagging (see Hot take). Future work: multi-label ground truth. |
 | **External validation (real calls)** | Ran two real contact-center calls beyond the synthetic fixtures — one fed in as its audio recording, one as its raw text transcript — through the whole pipeline. | The audio was transcribed into a correctly-labeled Agent/Customer conversation, and the compliance verdict matched between the audio and text inputs on both calls: one call flagged the same 3 policy types (P-01/P-03/P-07) either way, the other flagged nothing either way. | The verdict is stable across input type — transcription was good enough that it didn't change the outcome. Qualitative and unscored; see Known Limitations › External validation sources. |
 
 ## Evaluation results
@@ -124,8 +124,8 @@ Precision is **0.571 under strict line-and-rule scoring** (a flag counts only if
 its exact line *and* rule match the single ground-truth label); under the
 per-call convention (right rule *somewhere* on a violation call) it is **0.8**.
 The gap between the two is entirely call_05 and call_10, where the agent grounded
-extra *real* violations the answer key doesn't label; on the two genuinely-clean
-calls it flagged nothing. See the
+additional defensible policy interpretations the single-label answer key doesn't
+represent; on the two genuinely-clean calls it flagged nothing. See the
 [Hot take](#hot-take).
 
 The two cases that separate a scanner from an agent:
@@ -161,25 +161,35 @@ to catch on this particular run. The two steps check different things: integrity
 (is this quote real) versus judgment (does it actually violate the rule) — and on
 this run, judgment was where the errors were.
 
-**Finding — the answer key is coarser than reality.** Calls 05 and 10 were each
-written with a second line reinforcing the labeled violation, and ground truth
-deliberately labels only one line per call. Running the real agent exposed the
-fixtures under-labeling in two ways: (1) multi-line — it caught both the labeled
-line and the unlabeled reinforcing line for the same rule (e.g. call_05 line 5,
-'designed to be risk-free for your principal', P-07); and (2) multi-rule — the
-offending utterances violate two overlapping rules at once ('completely safe,
-you can't lose money' is both an implied guarantee, P-01, and a risk
+**Finding — single-label ground truth doesn't credit defensible multi-rule reads.**
+Calls 05 and 10 were each written with a second line reinforcing the labeled
+violation, and ground truth deliberately labels only one line per call. Running
+the real agent surfaced two additional defensible policy interpretations the
+single-label fixtures don't represent: (1) multi-line — it also grounded the
+unlabeled reinforcing line for the same rule (e.g. call_05 line 5, 'designed to
+be risk-free for your principal', P-07); and (2) multi-rule — the utterances
+arguably implicate two overlapping rules at once ('completely safe, you can't
+lose money' reads as both an implied guarantee, P-01, and a risk
 misrepresentation, P-07), so it grounded both. Every one of these is a verbatim,
 quote-checked line, and both genuinely-clean calls (02, 09) were flagged with
-nothing — so this is the ground truth under-labeling real violations, not the
-agent inventing them. Under strict line-and-rule scoring they count against
-precision (0.571); a future iteration would extend ground truth to allow
-multiple labeled (line, policy) violations per call, recovering precision toward
-1.0.
+nothing — so these are additional defensible policy interpretations not
+represented by the single-label ground truth, not the agent inventing citations.
+Under strict line-and-rule scoring they count against precision (0.571); a future
+iteration could extend ground truth to allow multiple labeled (line, policy)
+reads per call, which would credit these and raise precision.
 
 ## Known limitations
 
 Specific to what was and wasn't tested — not general hedging.
+
+**One disambiguation up front (three different exercises, not a contradiction):**
+the **scored 10-fixture eval** runs on synthetic, hand-authored **text**
+transcripts; the optional **audio-ingestion demo** below uses **synthetic TTS
+audio** (this is what "clean TTS" refers to); and the **AxonData external
+validation** (see *External validation sources*) is a **separate, unscored
+qualitative check on real audio**. So "clean TTS" and "real contact-center calls"
+describe two different unscored audio exercises — they do not contradict each
+other, and neither is the scored text eval.
 
 - **Audio was tested on clean TTS, not real calls.** The round-trip was
   validated only on synthetic text-to-speech audio. Real telephony audio is

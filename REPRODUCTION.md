@@ -50,14 +50,16 @@ pip install -r requirements.txt
 make eval               # or: python3 -m eval.run_eval --provider gemini
 ```
 
-Writes `eval/results/results_gemini.md` / `.json`. Measured:
+Writes `eval/results/results_gemini.md` / `.json`. Measured (same 4-system,
+dual-convention table as the README, to keep the two documents from drifting):
 
-| Metric | Random 5% | Keyword | **Gemini agent** |
-|---|---|---|---|
-| Coverage | 10% | 100% | **100%** |
-| Violations caught | 0 | 5 | **8 / 8** |
-| Recall | 0.0 | 0.63 | **1.0** |
-| Precision | 0.0 | 0.63 | **0.571** (strict) |
+| Metric | Random 5% | Keyword match | Flagger only (no verifier) | **Gemini agent (full)** |
+| --- | --- | --- | --- | --- |
+| Coverage (% reviewed) | 10% | 100% | 100% | **100%** |
+| Violations caught (TP) | 0 / 8 | 5 / 8 | 8 / 8 | **8 / 8** |
+| Recall | 0.0 | 0.625 | 1.0 | **1.0** |
+| Precision — per-call | 0.0 | 0.625 | 0.615 | **0.8** |
+| Precision — strict (line + rule) | 0.0 | 0.455 | 0.4 | **0.571** |
 
 The flagger and verifier models default to the values in `core/llm.py` and are
 overridable via `FLAGGER_MODEL` / `VERIFIER_MODEL` (different Google accounts
@@ -82,7 +84,7 @@ false-positive count on those two calls may vary slightly run to run.
 ## 2. Offline smoke test (no key) — plumbing only
 
 ```bash
-make test        # 9 tests, no key
+make test        # 11 tests, no key
 python3 -m eval.run_eval --provider offline   # confirms the pipeline runs end to end
 ```
 
@@ -93,7 +95,7 @@ not a result.** The pattern list was written with knowledge of these 10 fixtures
 expected and meaningless as evidence of general capability. It exists to prove
 the plumbing, and for CI.
 
-The 9 tests cover: the pipeline runs end to end on all 10 fixtures; the
+The 11 tests cover: the pipeline runs end to end on all 10 fixtures; the
 programmatic quote check rejects fabricated quotes and wrong line numbers and
 normalizes whitespace; the keyword baseline demonstrably false-positives on
 call_09 and misses call_10; the random sample reviews exactly 1/10 calls; and the
@@ -127,9 +129,10 @@ Strict single-label matching, per call:
 - **Coverage** — share of calls actually reviewed.
 
 Ground truth is single-label and single-line. On call_05 and call_10 the Gemini
-agent grounds additional *real* violations the answer key doesn't label (a second
-rule and a second line — see the README Hot take), which strict scoring counts
-against precision (0.571). A per-call policy-set scoring collapses these to 0.80.
+agent grounds additional defensible policy interpretations the single-label answer
+key doesn't represent (a second rule and a second line — see the README Hot take),
+which strict scoring counts against precision (0.571). A per-call policy-set
+scoring collapses these to 0.80.
 Full per-call detail is written to `eval/results/results_<provider>.json`.
 
 ## Data provenance
