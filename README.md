@@ -208,28 +208,39 @@ has the full cost/runtime breakdown and the exact model IDs used.
 
 ## Running it yourself
 
-Requires Python 3.9+. The tests and the offline smoke test need **no**
-dependencies or API key; the scored agent needs a Gemini key.
+Requires Python 3.9+. `make test` and `make baseline` need **no** dependencies
+or API key; `make agent` / `make eval` need a `GEMINI_API_KEY`.
+
+### With `make` (recommended)
+
+| Command | What it does | Needs key? |
+|---|---|---|
+| `make setup` | create the venv and install dependencies | — |
+| `make test` | run the 9-test suite | no |
+| `make baseline` | run both baselines over the fixtures | no |
+| `make agent` | run the Gemini agent over all transcripts | yes |
+| `make eval` | score baselines + agent vs. ground truth (writes `eval/results/`) | yes |
+| `make clean` | remove caches and the venv | — |
 
 ```bash
-# 1. Real agent — install deps and add your key
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env         # add GEMINI_API_KEY
-
-# 2. Run the scored eval on the real Gemini agent   (make eval)
-python -m eval.run_eval --provider gemini
-
-# 3. Inspect a single call end-to-end
-python -m agent.pipeline --call call_10 --provider gemini
-
-# 4. Run the tests (no key required)                (make test)
-python -m unittest discover -s tests -v
-
-# (No key? `python -m eval.run_eval --provider offline` runs the smoke test.)
+make setup
+cp .env.example .env      # add GEMINI_API_KEY (only for make agent / make eval)
+make eval                 # scored result on the real Gemini agent
+make test                 # no key needed
 ```
 
-A `Makefile` wraps these: `make setup | baseline | agent | eval | test | clean`.
+`make help` lists every target.
+
+### Without `make` (raw equivalents, e.g. Windows)
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt  # make setup
+python -m unittest discover -s tests -v          # make test  (no key)
+python -m eval.run_eval --provider gemini        # make eval
+python -m agent.pipeline --provider gemini       # make agent
+python -m eval.run_eval --provider offline       # no key: offline smoke test
+python -m agent.pipeline --call call_10 --provider gemini   # inspect one call end-to-end
+```
 
 ## Repo layout
 
