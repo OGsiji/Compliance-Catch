@@ -19,7 +19,10 @@ quoted, rule-cited findings instead of listening to calls at random.
 A missed violation isn't a bug ticket — it's a mis-sold product, a regulatory
 finding, or a fine. But the opposite failure matters too: a tool that flags
 everything trains reviewers to ignore it. The goal is full coverage *with*
-grounding, so each flag is cheap for a human to confirm or dismiss.
+grounding, so each flag is cheap for a human to confirm or dismiss. To be clear
+about that gate: *grounded* means a flag is source-cited (the quote is verified
+to exist verbatim) and independently re-checked against the specific policy text
+— **not legally adjudicated**. A human compliance reviewer makes the final call.
 
 ## How it works
 
@@ -41,6 +44,10 @@ not one model grading itself:
 2. **Scoped policy re-check** (narrow LLM call). Shown *only* the one quoted
    line and the *one* cited rule — never the whole transcript or policy — and
    asked yes/no. "No" downgrades to *needs review*; "yes" marks it *grounded*.
+
+*Grounded* means the flag is **source-cited** (the quote is verified to exist
+verbatim) and **independently re-checked** against the specific policy text —
+**not legally adjudicated**. A human compliance reviewer makes the final call.
 
 **Router** — assembles the clean per-call report: quote, policy citation,
 severity, status, reasoning. Nothing else.
