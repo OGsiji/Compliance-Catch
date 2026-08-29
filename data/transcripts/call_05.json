@@ -1,0 +1,11 @@
+{
+  "id": "call_05",
+  "lines": [
+    {"line": 1, "speaker": "Agent", "text": "Hi, this is Chris with Vantage Wealth, you asked about the variable annuity we discussed last week."},
+    {"line": 2, "speaker": "Customer", "text": "Yes, I'm still a little nervous about the market though."},
+    {"line": 3, "speaker": "Agent", "text": "I understand, but honestly, this one is completely safe, you can't lose money with it."},
+    {"line": 4, "speaker": "Customer", "text": "Really? Even if the market drops?"},
+    {"line": 5, "speaker": "Agent", "text": "Even then, it's designed to be risk-free for your principal."},
+    {"line": 6, "speaker": "Customer", "text": "Okay, that makes me feel better. Let's go ahead."}
+  ]
+}

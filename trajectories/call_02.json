@@ -1,0 +1,12 @@
+[
+  {
+    "timestamp": "2026-08-29T10:05:10",
+    "stage": "flagger",
+    "model": "offline-heuristic",
+    "input": {
+      "note": "offline heuristic flagger",
+      "n_lines": 12
+    },
+    "output": []
+  }
+]

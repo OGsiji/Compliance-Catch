@@ -1,0 +1,12 @@
+{
+  "id": "call_06",
+  "lines": [
+    {"line": 1, "speaker": "Agent", "text": "Hi, this is Robin with Fairview Bank, you'd asked about opening a basic checking account."},
+    {"line": 2, "speaker": "Customer", "text": "Yes, just the free basic one please."},
+    {"line": 3, "speaker": "Agent", "text": "Actually, I went ahead and enrolled you in our Premium Checking tier instead since it has more features."},
+    {"line": 4, "speaker": "Customer", "text": "Oh, I didn't ask for that, does it cost anything?"},
+    {"line": 5, "speaker": "Agent", "text": "There's a $12 monthly fee, but you'll get better perks."},
+    {"line": 6, "speaker": "Customer", "text": "I'd rather just have the basic account."},
+    {"line": 7, "speaker": "Agent", "text": "No problem, I'll switch it back."}
+  ]
+}

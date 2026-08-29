@@ -1,0 +1,6 @@
+# Core pipeline — only needed for the real Gemini provider. The offline
+# heuristic provider and the full eval/tests run with zero dependencies.
+google-genai>=1.40,<2.0
+
+# Optional: synthetic audio generation for the bonus audio demo.
+# Install separately when needed:  pip install gTTS

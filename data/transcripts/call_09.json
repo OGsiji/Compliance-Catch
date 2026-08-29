@@ -1,0 +1,10 @@
+{
+  "id": "call_09",
+  "lines": [
+    {"line": 1, "speaker": "Agent", "text": "Hi, this is Owen with Federal Savings Direct."},
+    {"line": 2, "speaker": "Customer", "text": "Hi, I wanted to lock in the current CD rate."},
+    {"line": 3, "speaker": "Agent", "text": "Sure, just so you know, the Fed rate resets at midnight tonight, that's not something I control, so the current rate is only guaranteed if we finalize before then."},
+    {"line": 4, "speaker": "Customer", "text": "Got it, let's go ahead now."},
+    {"line": 5, "speaker": "Agent", "text": "Perfect, I'll get the paperwork started."}
+  ]
+}

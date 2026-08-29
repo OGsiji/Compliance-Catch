@@ -1,0 +1,13 @@
+{
+  "id": "call_03",
+  "lines": [
+    {"line": 1, "speaker": "Agent", "text": "Hi, this is Marcus with Deerfield Credit Union, how can I help?"},
+    {"line": 2, "speaker": "Customer", "text": "Hi, I just want to check my balance real quick."},
+    {"line": 3, "speaker": "Agent", "text": "Sure, what's your name?"},
+    {"line": 4, "speaker": "Customer", "text": "It's Lena Cho."},
+    {"line": 5, "speaker": "Agent", "text": "Okay Lena, let me pull that up... your checking account balance is $3,214.60, and you have a pending transfer of $500 going out tomorrow."},
+    {"line": 6, "speaker": "Customer", "text": "Oh good, that's what I expected."},
+    {"line": 7, "speaker": "Agent", "text": "Anything else?"},
+    {"line": 8, "speaker": "Customer", "text": "No that's all, thanks."}
+  ]
+}

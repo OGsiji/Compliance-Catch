@@ -1,0 +1,15 @@
+{
+  "id": "call_01",
+  "lines": [
+    {"line": 1, "speaker": "Agent", "text": "Thanks for calling, this is Jordan with Meridian Financial, how can I help you today?"},
+    {"line": 2, "speaker": "Customer", "text": "Hi, I'm looking into your growth investment account, is it a good option right now?"},
+    {"line": 3, "speaker": "Agent", "text": "It's one of our most popular products. Before we go further, can I get your full name and date of birth to pull up any existing account?"},
+    {"line": 4, "speaker": "Customer", "text": "Sure, it's Alex Turner, March 4th 1985."},
+    {"line": 5, "speaker": "Agent", "text": "Great, thanks Alex. So this account holds a mix of equities and bonds, and there's a $25 annual maintenance fee."},
+    {"line": 6, "speaker": "Customer", "text": "Okay. What kind of returns are we talking about?"},
+    {"line": 7, "speaker": "Agent", "text": "Historically it's tracked around 6 to 8 percent, but honestly, I can guarantee you'll see at least 8% returns every year with this fund."},
+    {"line": 8, "speaker": "Customer", "text": "Wow, that sounds great."},
+    {"line": 9, "speaker": "Agent", "text": "It really is. Do you want to go ahead and open the account today?"},
+    {"line": 10, "speaker": "Customer", "text": "Let's do it."}
+  ]
+}

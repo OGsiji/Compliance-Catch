@@ -1,0 +1,17 @@
+{
+  "id": "call_02",
+  "lines": [
+    {"line": 1, "speaker": "Agent", "text": "Good afternoon, this is Priya with Northgate Bank, and just so you know, this call may be recorded for quality and compliance purposes."},
+    {"line": 2, "speaker": "Customer", "text": "Okay, that's fine."},
+    {"line": 3, "speaker": "Agent", "text": "To pull up your account, can I confirm your full name and the last four digits of your account number?"},
+    {"line": 4, "speaker": "Customer", "text": "Sam Ortiz, and it's 4471."},
+    {"line": 5, "speaker": "Agent", "text": "Thanks Sam, I've got your savings account here. What can I help with today?"},
+    {"line": 6, "speaker": "Customer", "text": "I wanted to ask about moving to your high-yield savings option."},
+    {"line": 7, "speaker": "Agent", "text": "Sure, that account currently earns 3.2% APY, and there's no monthly fee as long as you keep a $500 minimum balance."},
+    {"line": 8, "speaker": "Customer", "text": "Any penalty for early withdrawal?"},
+    {"line": 9, "speaker": "Agent", "text": "No penalty, it's fully liquid, you can withdraw anytime."},
+    {"line": 10, "speaker": "Customer", "text": "Great, let's switch me over."},
+    {"line": 11, "speaker": "Agent", "text": "Done. You'll get a confirmation email, and if anything ever seems off with the account, you can reach us on this line to file a concern."},
+    {"line": 12, "speaker": "Customer", "text": "Perfect, thank you."}
+  ]
+}

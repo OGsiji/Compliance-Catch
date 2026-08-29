@@ -1,0 +1,271 @@
+{
+  "provider": "gemini",
+  "scores": {
+    "random": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 8,
+      "tn": 2,
+      "reviewed": 1,
+      "total": 10,
+      "needs_review": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "coverage_pct": 10.0
+    },
+    "keyword": {
+      "tp": 5,
+      "fp": 3,
+      "fn": 3,
+      "tn": 1,
+      "reviewed": 10,
+      "total": 10,
+      "needs_review": 0,
+      "precision": 0.625,
+      "recall": 0.625,
+      "coverage_pct": 100.0
+    },
+    "agent": {
+      "tp": 8,
+      "fp": 2,
+      "fn": 0,
+      "tn": 2,
+      "reviewed": 10,
+      "total": 10,
+      "needs_review": 4,
+      "precision": 0.8,
+      "recall": 1.0,
+      "coverage_pct": 100.0
+    }
+  },
+  "per_call": {
+    "call_01": {
+      "ground_truth": {
+        "violation": true,
+        "policy_id": "P-01",
+        "line": 7,
+        "severity": "high"
+      },
+      "random": {
+        "reviewed": false,
+        "policy_ids": []
+      },
+      "keyword": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-01"
+        ]
+      },
+      "agent": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-01"
+        ]
+      }
+    },
+    "call_02": {
+      "ground_truth": {
+        "violation": false
+      },
+      "random": {
+        "reviewed": true,
+        "policy_ids": []
+      },
+      "keyword": {
+        "reviewed": true,
+        "policy_ids": []
+      },
+      "agent": {
+        "reviewed": true,
+        "policy_ids": []
+      }
+    },
+    "call_03": {
+      "ground_truth": {
+        "violation": true,
+        "policy_id": "P-03",
+        "line": 5,
+        "severity": "medium"
+      },
+      "random": {
+        "reviewed": false,
+        "policy_ids": []
+      },
+      "keyword": {
+        "reviewed": true,
+        "policy_ids": []
+      },
+      "agent": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-03"
+        ]
+      }
+    },
+    "call_04": {
+      "ground_truth": {
+        "violation": true,
+        "policy_id": "P-04",
+        "line": 5,
+        "severity": "medium"
+      },
+      "random": {
+        "reviewed": false,
+        "policy_ids": []
+      },
+      "keyword": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-04"
+        ]
+      },
+      "agent": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-04"
+        ]
+      }
+    },
+    "call_05": {
+      "ground_truth": {
+        "violation": true,
+        "policy_id": "P-07",
+        "line": 3,
+        "severity": "high"
+      },
+      "random": {
+        "reviewed": false,
+        "policy_ids": []
+      },
+      "keyword": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-07"
+        ]
+      },
+      "agent": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-01",
+          "P-07"
+        ]
+      }
+    },
+    "call_06": {
+      "ground_truth": {
+        "violation": true,
+        "policy_id": "P-08",
+        "line": 3,
+        "severity": "medium"
+      },
+      "random": {
+        "reviewed": false,
+        "policy_ids": []
+      },
+      "keyword": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-08"
+        ]
+      },
+      "agent": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-08"
+        ]
+      }
+    },
+    "call_07": {
+      "ground_truth": {
+        "violation": true,
+        "policy_id": "P-06",
+        "line": 3,
+        "severity": "high"
+      },
+      "random": {
+        "reviewed": false,
+        "policy_ids": []
+      },
+      "keyword": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-06",
+          "P-08"
+        ]
+      },
+      "agent": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-06"
+        ]
+      }
+    },
+    "call_08": {
+      "ground_truth": {
+        "violation": true,
+        "policy_id": "P-12",
+        "line": 3,
+        "severity": "high"
+      },
+      "random": {
+        "reviewed": false,
+        "policy_ids": []
+      },
+      "keyword": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-04"
+        ]
+      },
+      "agent": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-12"
+        ]
+      }
+    },
+    "call_09": {
+      "ground_truth": {
+        "violation": false
+      },
+      "random": {
+        "reviewed": false,
+        "policy_ids": []
+      },
+      "keyword": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-01",
+          "P-04"
+        ]
+      },
+      "agent": {
+        "reviewed": true,
+        "policy_ids": []
+      }
+    },
+    "call_10": {
+      "ground_truth": {
+        "violation": true,
+        "policy_id": "P-01",
+        "line": 3,
+        "severity": "high"
+      },
+      "random": {
+        "reviewed": false,
+        "policy_ids": []
+      },
+      "keyword": {
+        "reviewed": true,
+        "policy_ids": []
+      },
+      "agent": {
+        "reviewed": true,
+        "policy_ids": [
+          "P-01",
+          "P-07"
+        ]
+      }
+    }
+  }
+}

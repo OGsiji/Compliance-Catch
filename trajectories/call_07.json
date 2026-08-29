@@ -1,0 +1,34 @@
+[
+  {
+    "timestamp": "2026-08-29T10:05:10",
+    "stage": "flagger",
+    "model": "offline-heuristic",
+    "input": {
+      "note": "offline heuristic flagger",
+      "n_lines": 5
+    },
+    "output": [
+      {
+        "line": 3,
+        "quote": "Honestly, an aggressive growth fund really isn't suitable for someone your age, I'd steer you toward something more conservative instead.",
+        "policy_id": "P-06",
+        "reasoning": "Agent implies differential treatment based on a protected characteristic.",
+        "severity": "high"
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-08-29T10:05:10",
+    "stage": "verifier:recheck",
+    "model": "offline-heuristic",
+    "input": {
+      "quote": "Honestly, an aggressive growth fund really isn't suitable for someone your age, I'd steer you toward something more conservative instead.",
+      "policy_id": "P-06",
+      "rule_text": "Agents must not make statements that reference or imply differential treatment based on a customer's age, race, gender, religion, national origin, or disability."
+    },
+    "output": {
+      "verdict": "yes",
+      "justification": "Offline scoped re-check on the single line + cited rule."
+    }
+  }
+]

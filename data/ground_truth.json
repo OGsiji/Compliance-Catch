@@ -1,0 +1,12 @@
+{
+  "call_01": {"violation": true, "policy_id": "P-01", "line": 7, "severity": "high"},
+  "call_02": {"violation": false},
+  "call_03": {"violation": true, "policy_id": "P-03", "line": 5, "severity": "medium"},
+  "call_04": {"violation": true, "policy_id": "P-04", "line": 5, "severity": "medium"},
+  "call_05": {"violation": true, "policy_id": "P-07", "line": 3, "severity": "high"},
+  "call_06": {"violation": true, "policy_id": "P-08", "line": 3, "severity": "medium"},
+  "call_07": {"violation": true, "policy_id": "P-06", "line": 3, "severity": "high"},
+  "call_08": {"violation": true, "policy_id": "P-12", "line": 3, "severity": "high"},
+  "call_09": {"violation": false},
+  "call_10": {"violation": true, "policy_id": "P-01", "line": 3, "severity": "high"}
+}

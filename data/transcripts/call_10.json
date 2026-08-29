@@ -1,0 +1,11 @@
+{
+  "id": "call_10",
+  "lines": [
+    {"line": 1, "speaker": "Agent", "text": "Hi, this is Nadia with Lighthouse Investments, you'd asked about our income fund."},
+    {"line": 2, "speaker": "Customer", "text": "Yes, I'm cautious about investing after what happened in 2008."},
+    {"line": 3, "speaker": "Agent", "text": "That's a fair concern. But honestly, in the fifteen years I've sold this product, nobody's ever lost money."},
+    {"line": 4, "speaker": "Customer", "text": "That's reassuring. Is there any risk at all?"},
+    {"line": 5, "speaker": "Agent", "text": "There's always some risk on paper, but in practice, like I said, nobody's walked away with less than they put in."},
+    {"line": 6, "speaker": "Customer", "text": "Okay, I feel good about this. Let's proceed."}
+  ]
+}

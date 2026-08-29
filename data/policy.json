@@ -1,0 +1,76 @@
+{
+  "rules": [
+    {
+      "id": "P-01",
+      "title": "No guaranteed returns",
+      "text": "Agents must not state or imply that any account, investment, or product will guarantee returns, gains, principal protection, or freedom from loss.",
+      "mode": "line"
+    },
+    {
+      "id": "P-02",
+      "title": "Fee disclosure",
+      "text": "Any fee, penalty, charge, or rate relevant to the product being discussed must be clearly stated to the customer before they commit to opening, upgrading, or purchasing it.",
+      "mode": "line"
+    },
+    {
+      "id": "P-03",
+      "title": "Identity verification",
+      "text": "Account-specific details (balance, transaction history, personal information) may not be discussed until the customer's identity has been verified using at least two identifiers.",
+      "mode": "line"
+    },
+    {
+      "id": "P-04",
+      "title": "No high-pressure tactics",
+      "text": "Agents must not use artificial urgency to pressure a customer into an immediate decision on a financial product.",
+      "mode": "line"
+    },
+    {
+      "id": "P-05",
+      "title": "Cooling-off period",
+      "text": "For credit products and insurance add-ons, the agent must inform the customer of their right to cancel within the statutory cooling-off period.",
+      "mode": "presence"
+    },
+    {
+      "id": "P-06",
+      "title": "No discriminatory language",
+      "text": "Agents must not make statements that reference or imply differential treatment based on a customer's age, race, gender, religion, national origin, or disability.",
+      "mode": "line"
+    },
+    {
+      "id": "P-07",
+      "title": "Accurate risk representation",
+      "text": "Agents must not understate the risk level of an investment product or describe a variable-return product as safe or risk-free.",
+      "mode": "line"
+    },
+    {
+      "id": "P-08",
+      "title": "No unauthorized product substitution",
+      "text": "Agents must not enroll or upgrade a customer into a different product than the one requested without explicit, recorded consent.",
+      "mode": "line"
+    },
+    {
+      "id": "P-09",
+      "title": "Call recording disclosure",
+      "text": "Agents must inform the customer that the call may be recorded for quality and compliance purposes, at or near the start of the call.",
+      "mode": "presence"
+    },
+    {
+      "id": "P-10",
+      "title": "Complaint handling",
+      "text": "If a customer expresses dissatisfaction or asks to file a complaint, the agent must acknowledge it and provide the complaint escalation path.",
+      "mode": "line"
+    },
+    {
+      "id": "P-11",
+      "title": "No unauthorized collections threats",
+      "text": "Agents must not threaten legal action, wage garnishment, or credit consequences that are not accurate or authorized by policy.",
+      "mode": "line"
+    },
+    {
+      "id": "P-12",
+      "title": "Vulnerable customer protocol",
+      "text": "If a customer discloses a circumstance suggesting vulnerability (cognitive difficulty, recent bereavement, financial hardship), the agent must slow down, offer to involve a trusted third party, and avoid upselling.",
+      "mode": "line"
+    }
+  ]
+}

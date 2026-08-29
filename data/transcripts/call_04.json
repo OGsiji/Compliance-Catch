@@ -1,0 +1,12 @@
+{
+  "id": "call_04",
+  "lines": [
+    {"line": 1, "speaker": "Agent", "text": "Thanks for calling Summit Lending, this is Dana."},
+    {"line": 2, "speaker": "Customer", "text": "Hi, I saw an ad for a lower rate on refinancing."},
+    {"line": 3, "speaker": "Agent", "text": "Yes, we've got a special promotional rate right now."},
+    {"line": 4, "speaker": "Customer", "text": "What's the rate?"},
+    {"line": 5, "speaker": "Agent", "text": "4.9%, but I should mention, this rate is only available if you sign up in the next 3 minutes, I have another call waiting after this."},
+    {"line": 6, "speaker": "Customer", "text": "Oh, um, okay, let's do it then."},
+    {"line": 7, "speaker": "Agent", "text": "Great, let me get your details."}
+  ]
+}

@@ -1,0 +1,55 @@
+[
+  {
+    "timestamp": "2026-08-29T10:05:10",
+    "stage": "flagger",
+    "model": "offline-heuristic",
+    "input": {
+      "note": "offline heuristic flagger",
+      "n_lines": 6
+    },
+    "output": [
+      {
+        "line": 3,
+        "quote": "I understand, but honestly, this one is completely safe, you can't lose money with it.",
+        "policy_id": "P-07",
+        "reasoning": "Agent describes a variable-return product as safe or risk-free.",
+        "severity": "high"
+      },
+      {
+        "line": 5,
+        "quote": "Even then, it's designed to be risk-free for your principal.",
+        "policy_id": "P-07",
+        "reasoning": "Agent describes a variable-return product as safe or risk-free.",
+        "severity": "high"
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-08-29T10:05:10",
+    "stage": "verifier:recheck",
+    "model": "offline-heuristic",
+    "input": {
+      "quote": "I understand, but honestly, this one is completely safe, you can't lose money with it.",
+      "policy_id": "P-07",
+      "rule_text": "Agents must not understate the risk level of an investment product or describe a variable-return product as safe or risk-free."
+    },
+    "output": {
+      "verdict": "yes",
+      "justification": "Offline scoped re-check on the single line + cited rule."
+    }
+  },
+  {
+    "timestamp": "2026-08-29T10:05:10",
+    "stage": "verifier:recheck",
+    "model": "offline-heuristic",
+    "input": {
+      "quote": "Even then, it's designed to be risk-free for your principal.",
+      "policy_id": "P-07",
+      "rule_text": "Agents must not understate the risk level of an investment product or describe a variable-return product as safe or risk-free."
+    },
+    "output": {
+      "verdict": "yes",
+      "justification": "Offline scoped re-check on the single line + cited rule."
+    }
+  }
+]

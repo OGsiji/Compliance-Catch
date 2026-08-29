@@ -1,0 +1,10 @@
+{
+  "id": "call_07",
+  "lines": [
+    {"line": 1, "speaker": "Agent", "text": "Hi, this is Dana with Crestline Financial. You'd asked about our aggressive growth portfolio."},
+    {"line": 2, "speaker": "Customer", "text": "Yes, I'm 68 and want to grow my retirement savings faster."},
+    {"line": 3, "speaker": "Agent", "text": "Honestly, an aggressive growth fund really isn't suitable for someone your age, I'd steer you toward something more conservative instead."},
+    {"line": 4, "speaker": "Customer", "text": "I appreciate the concern, but I've done my research and I'd like to proceed with the growth fund."},
+    {"line": 5, "speaker": "Agent", "text": "I hear you, let me pull up the paperwork for that."}
+  ]
+}

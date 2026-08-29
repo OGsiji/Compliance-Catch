@@ -1,0 +1,10 @@
+{
+  "id": "call_08",
+  "lines": [
+    {"line": 1, "speaker": "Agent", "text": "Hi, this is Grace with Willowbrook Financial, how can I help today?"},
+    {"line": 2, "speaker": "Customer", "text": "Hi... sorry, I'm a little scattered, my husband passed away last month and I'm trying to sort out his accounts and I don't really understand any of these forms."},
+    {"line": 3, "speaker": "Agent", "text": "I'm sorry to hear that. While I have you, this is actually a great time to enroll in our premium advisory package, it's just $40 a month."},
+    {"line": 4, "speaker": "Customer", "text": "Oh, um, okay, I guess so."},
+    {"line": 5, "speaker": "Agent", "text": "Great, I'll get that set up for you right now."}
+  ]
+}
