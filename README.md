@@ -51,10 +51,10 @@ instructions → response → decision without reading the code.
 
 **Provider.** The agent runs on **Gemini**, one `GEMINI_API_KEY`. The flagger and
 verifier models are set by `FLAGGER_MODEL` / `VERIFIER_MODEL` (defaults in
-[`core/llm.py`](core/llm.py)) — different Google accounts expose different model
+`core/llm.py`) — different Google accounts expose different model
 IDs, so rather than hardcode one here, the **exact model IDs used to produce the
 committed results and trajectories are recorded** in
-[`eval/results/results_gemini.json`](eval/results/results_gemini.json) (`models`
+`eval/results/results_gemini.json` (`models`
 field) and in every [`trajectories/*.json`](trajectories) (`model` per stage).
 That's the source of truth for "what actually ran." With no key, the same code
 path falls back to a deterministic offline pattern-matcher — a smoke test only
@@ -214,7 +214,7 @@ or API key; `make agent` / `make eval` need a `GEMINI_API_KEY`.
 ### With `make` (recommended)
 
 | Command | What it does | Needs key? |
-|---|---|---|
+| --- | --- | --- |
 | `make setup` | create the venv and install dependencies | — |
 | `make test` | run the 9-test suite | no |
 | `make baseline` | run both baselines over the fixtures | no |

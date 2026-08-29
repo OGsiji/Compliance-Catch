@@ -1,5 +1,9 @@
 {
   "provider": "gemini",
+  "models": {
+    "flagger": "gemini-2.5-flash",
+    "verifier": "gemini-flash-lite-latest"
+  },
   "scores": {
     "random": {
       "tp": 0,
@@ -32,7 +36,7 @@
       "tn": 2,
       "reviewed": 10,
       "total": 10,
-      "needs_review": 4,
+      "needs_review": 0,
       "precision": 0.8,
       "recall": 1.0,
       "coverage_pct": 100.0

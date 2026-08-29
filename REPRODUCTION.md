@@ -4,6 +4,18 @@ The scored result is the **Gemini agent** (needs a `GEMINI_API_KEY`). The tests
 and the **offline smoke test** need no credentials — but the offline run is a
 plumbing check, not a reported result (see the note in step 3).
 
+## If you don't have reliable model access
+
+You do not need a working API key to verify the reported result. The committed
+[`trajectories/`](trajectories) directory contains the **full logged
+input/output of an actual Gemini run across all 10 calls** (a JSON and a
+Markdown file per call), and [`eval/results/`](eval/results) contains the
+resulting scored tables. Together these are sufficient to check the numbers in
+the README without running anything. `make test` and `make baseline` require no
+credentials and confirm the codebase itself runs correctly. `make agent` and
+`make eval` require a `GEMINI_API_KEY` only if you want to reproduce the live run
+yourself — not to verify the claims already made in the README.
+
 ## Requirements
 
 - Python 3.9+
