@@ -47,8 +47,11 @@ Writes `eval/results/results_gemini.md` / `.json`. Measured:
 | Recall | 0.0 | 0.63 | **1.0** |
 | Precision | 0.0 | 0.63 | **0.571** (strict) |
 
-Flagger uses `gemini-2.5-flash`; the verifier's scoped re-check uses
-`gemini-flash-lite-latest`; temperature 0. Recall and coverage are stable;
+The flagger and verifier models default to the values in `core/llm.py` and are
+overridable via `FLAGGER_MODEL` / `VERIFIER_MODEL` (different Google accounts
+offer different model IDs). The **exact IDs used for the committed run** are
+recorded in `eval/results/results_gemini.json` (`models` field) and in each
+`trajectories/*.json`. Temperature 0. Recall and coverage are stable;
 precision is 0.571 under strict line-and-rule scoring (0.80 per call) — the gap
 is the call_05/call_10 extra-but-real flags described in the README Hot take.
 Model outputs are not guaranteed bit-identical across revisions, so the exact

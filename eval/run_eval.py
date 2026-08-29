@@ -104,7 +104,10 @@ def agent_predictions(transcripts, policy, policy_idx, provider) -> Dict[str, di
             "policy_ids": {r.policy_id for r in grounded},
             "needs_review": len(needs),
         }
-    return preds, provider_name(client)
+    models = ({"flagger": client.flagger_model, "verifier": client.verifier_model}
+              if client is not None
+              else {"flagger": "offline-heuristic", "verifier": "offline-heuristic"})
+    return preds, provider_name(client), models
 
 
 def keyword_predictions(transcripts) -> Dict[str, dict]:
@@ -141,16 +144,20 @@ ROWS = [
 ]
 
 
-def render_table(scores: Dict[str, dict], provider: str) -> str:
+def render_table(scores: Dict[str, dict], provider: str, models: dict = None) -> str:
     def cell(sysname, key, unit):
         v = scores[sysname].get(key, 0)
         return f"{v}{unit}"
 
+    model_line = ""
+    if models:
+        model_line = (f" · models: flagger `{models.get('flagger')}`, "
+                      f"verifier `{models.get('verifier')}`")
     lines = [
         f"# Compliance Catch — eval results (agent provider: `{provider}`)",
         "",
         f"_Generated {_dt.datetime.now().isoformat(timespec='seconds')} · "
-        f"{scores['agent']['total']} fixtures_",
+        f"{scores['agent']['total']} fixtures{model_line}_",
         "",
         "| Metric | Random 5% | Keyword match | Agent | Δ (keyword → agent) |",
         "|---|---|---|---|---|",
@@ -244,7 +251,7 @@ def main(argv=None) -> int:
     policy_idx = policy_index(policy)
     ground_truth = load_ground_truth()
 
-    agent_preds, provider = agent_predictions(transcripts, policy, policy_idx, args.provider)
+    agent_preds, provider, models = agent_predictions(transcripts, policy, policy_idx, args.provider)
     all_preds = {
         "random": random_predictions(transcripts),
         "keyword": keyword_predictions(transcripts),
@@ -263,7 +270,7 @@ def main(argv=None) -> int:
                 "policy_ids": sorted(info.get("policy_ids", set())),
             }
 
-    table = render_table(scores, provider)
+    table = render_table(scores, provider, models)
     print(table)
 
     os.makedirs(RESULTS_DIR, exist_ok=True)
@@ -272,7 +279,7 @@ def main(argv=None) -> int:
     with open(md_path, "w", encoding="utf-8") as fh:
         fh.write(table)
     with open(json_path, "w", encoding="utf-8") as fh:
-        json.dump({"provider": provider, "scores": scores, "per_call": per_call},
+        json.dump({"provider": provider, "models": models, "scores": scores, "per_call": per_call},
                   fh, indent=2)
 
     # Post-processing: recurring-pattern aggregation over the grounded flags.
