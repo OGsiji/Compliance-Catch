@@ -209,8 +209,8 @@ general *approach* of turning call audio into the transcript JSON schema, and th
 shared `GEMINI_API_KEY` (one credential to document).
 
 Everything in this repository was written this weekend. Specifically,
-`agent/transcribe.py` was written fresh from the google-genai SDK and the approach
-described in `docs/IMPLEMENTATION_PLAN.md`; the audio-transcription-system's own
+`agent/transcribe.py` was written fresh from the google-genai SDK and general
+Gemini API knowledge; the audio-transcription-system's own
 source code was **not opened, read, or copied** while writing it — verified: no
 such source exists in this repo or its git history, and it was not referenced
 during the build. The reuse is conceptual and credential-level, not code-level.
@@ -271,7 +271,7 @@ data/            policy.json · transcripts/ · ground_truth.json (held out) · 
 core/            shared library: models, data loading, prompts, heuristics, LLM client, logging
 baseline/        random_sample.py · keyword_match.py
 agent/           flagger.py · verifier.py · router.py · pipeline.py · transcribe.py (optional)
-eval/            run_eval.py · results/ (per-run tables + patterns.md = recurring-rule aggregation)
+eval/            run_eval.py · results/ (per-provider tables + patterns_<provider>.md = recurring-rule aggregation)
 trajectories/    per-call JSON + Markdown logs
 tests/           end-to-end + unit tests (run on the offline smoke test)
 scripts/         generate_sample_audio.py (optional TTS demo)
@@ -295,5 +295,5 @@ least 8%" line intact, and the pipeline then ran unchanged on it. This is a
 capability demo, not a robustness claim — see [Known limitations](#known-limitations)
 for exactly what was and wasn't tested.
 
-See `docs/IMPLEMENTATION_PLAN.md` for the full
-build spec and the exact instructions handed to each agent stage.
+The exact instructions handed to each agent stage — the flagger and verifier
+prompts, disclosed verbatim — live in [`core/prompts.py`](core/prompts.py).

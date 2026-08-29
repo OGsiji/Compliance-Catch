@@ -73,7 +73,13 @@ def main(argv=None) -> int:
     policy_idx = policy_index(policy)
     client = make_client(args.provider)
     provider = provider_name(client)
-    logger = TrajectoryLogger()
+    # Only the real Gemini run writes to the committed /trajectories; offline
+    # (smoke) runs write throwaway traces to a scratch dir instead.
+    import os as _os
+    from core.trajectory import TRAJECTORY_DIR
+    from core.data import REPO_ROOT as _ROOT
+    traj_dir = TRAJECTORY_DIR if provider == "gemini" else _os.path.join(_ROOT, "eval", "results", "_smoke_trajectories")
+    logger = TrajectoryLogger(directory=traj_dir)
     flagger = Flagger(client, logger)
     verifier = Verifier(client, logger)
 

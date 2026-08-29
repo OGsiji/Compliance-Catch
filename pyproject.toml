@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "compliance-catch"
+version = "0.3.0"
+description = "Two-stage LLM agent that grounds compliance-violation flags in financial call transcripts."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [{ name = "OGsiji" }]
+keywords = ["compliance", "llm-agent", "gemini", "grounding", "evaluation"]
+dependencies = [
+  # Only needed for the real Gemini provider. The offline smoke test and the
+  # test suite run with zero dependencies.
+  "google-genai==1.47.0",
+]
+
+[project.optional-dependencies]
+audio = ["gTTS>=2.5"]      # bonus audio-ingestion demo only
+
+[project.urls]
+Repository = "https://github.com/OGsiji/Compliance-Catch"
+
+[tool.setuptools]
+# Flat layout: the pipeline packages. Tests / scripts / data are not shipped.
+packages = ["core", "agent", "baseline", "eval"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -29,7 +29,7 @@ from baseline.keyword_match import keyword_flags
 from core.data import (REPO_ROOT, load_all_transcripts, load_ground_truth,
                        load_policy, policy_index)
 from core.llm import make_client, provider_name
-from core.trajectory import TrajectoryLogger
+from core.trajectory import TrajectoryLogger, TRAJECTORY_DIR
 
 RESULTS_DIR = os.path.join(REPO_ROOT, "eval", "results")
 
@@ -84,7 +84,12 @@ def score(predictions: Dict[str, dict], ground_truth: Dict[str, dict]) -> dict:
 
 def agent_predictions(transcripts, policy, policy_idx, provider) -> Dict[str, dict]:
     client = make_client(provider)
-    logger = TrajectoryLogger()
+    # The committed /trajectories are the real Gemini run (a submission artifact).
+    # The offline smoke test writes its throwaway traces to a scratch dir so it
+    # can never clobber them.
+    prov = provider_name(client)
+    traj_dir = TRAJECTORY_DIR if prov == "gemini" else os.path.join(RESULTS_DIR, "_smoke_trajectories")
+    logger = TrajectoryLogger(directory=traj_dir)
     flagger = Flagger(client, logger)
     verifier = Verifier(client, logger)
     preds: Dict[str, dict] = {}
@@ -284,7 +289,7 @@ def main(argv=None) -> int:
 
     # Post-processing: recurring-pattern aggregation over the grounded flags.
     patterns = aggregate_patterns(agent_preds)
-    patterns_path = os.path.join(RESULTS_DIR, "patterns.md")
+    patterns_path = os.path.join(RESULTS_DIR, f"patterns_{provider}.md")
     with open(patterns_path, "w", encoding="utf-8") as fh:
         fh.write(render_patterns(patterns, provider, policy_idx))
 

@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.3.1 — cleanup + reproducibility hardening
+
+### Changed
+- Removed internal planning docs (`docs/`) and stray/offline result artifacts;
+  README/REPRODUCTION now point to `core/prompts.py` for the disclosed agent
+  instructions.
+- Result artifacts are provider-scoped (`patterns_<provider>.md`); the offline
+  smoke test writes its scores and traces to gitignored scratch locations so it
+  can never clobber the committed Gemini results or `/trajectories`.
+
+### Added
+- `pyproject.toml` (installable package, pinned `google-genai==1.47.0`, optional
+  `audio` extra) and a pinned `requirements.txt`.
+- GitHub Actions CI running the test suite, baselines, and the offline smoke eval
+  on Python 3.9/3.11/3.12 — with **no API key** — on every push.
+
 ## 0.3.0 — honest positioning + tooling
 
 ### Changed

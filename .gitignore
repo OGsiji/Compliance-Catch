@@ -14,3 +14,18 @@ _local_extval/
 support_billing/
 *customer_support*/
 *.docx
+
+# Local editor/agent settings
+.claude/
+
+# Offline smoke-test outputs are regenerated artifacts, not committed results
+eval/results/results_offline.*
+eval/results/patterns_offline.md
+eval/results/agent_reports_*.json
+
+# Python build artifacts
+*.egg-info/
+build/
+dist/
+
+eval/results/_smoke_trajectories/

@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      # No pip install: the test suite and baselines run with zero dependencies
+      # (the Gemini SDK is imported lazily and only the offline path is exercised).
+      - name: Run test suite (no API key)
+        run: make test
+      - name: Run baselines (no API key)
+        run: make baseline
+      - name: Run offline smoke eval (no API key)
+        run: python -m eval.run_eval --provider offline

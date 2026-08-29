@@ -136,4 +136,4 @@ Full per-call detail is written to `eval/results/results_<provider>.json`.
 
 `data/ground_truth.json` is the eval oracle and is **never** passed to the
 flagger or verifier — it is read only by `eval/run_eval.py`. The 10 transcripts
-and 12 policy rules are synthetic, authored per `docs/eval_test_cases_v2.md`.
+and 12 policy rules are synthetic, authored by hand for this eval.
