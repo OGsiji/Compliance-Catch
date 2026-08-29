@@ -1,6 +1,6 @@
 [
   {
-    "timestamp": "2026-08-29T21:56:42",
+    "timestamp": "2026-08-29T23:54:57",
     "stage": "flagger",
     "model": "gemini-2.5-flash",
     "input": {
@@ -21,7 +21,7 @@
     }
   },
   {
-    "timestamp": "2026-08-29T21:56:44",
+    "timestamp": "2026-08-29T23:54:57",
     "stage": "verifier:recheck",
     "model": "gemini-flash-lite-latest",
     "input": {
@@ -29,9 +29,9 @@
       "user": "Line: \"Honestly, an aggressive growth fund really isn't suitable for someone your age, I'd steer you toward something more conservative instead.\"\nPolicy rule P-06: \"Agents must not make statements that reference or imply differential treatment based on a customer's age, race, gender, religion, national origin, or disability.\"\n"
     },
     "output": {
-      "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent explicitly recommends a financial product based directly on the customer's age, violating the rule against differential treatment based on age.\"\n}",
+      "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent explicitly recommends a financial product based on the customer's age, which violates the prohibition against referencing or implying differential treatment based on age.\"\n}",
       "verdict": "yes",
-      "justification": "The agent explicitly recommends a financial product based directly on the customer's age, violating the rule against differential treatment based on age."
+      "justification": "The agent explicitly recommends a financial product based on the customer's age, which violates the prohibition against referencing or implying differential treatment based on age."
     }
   }
 ]

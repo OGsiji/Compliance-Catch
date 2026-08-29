@@ -1,6 +1,6 @@
 # Trajectory — call_09
 
-## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-29T22:05:49
+## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-29T23:55:16
 
 **Input**
 
@@ -35,7 +35,7 @@
 }
 ```
 
-## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T22:05:50
+## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:55:17
 
 **Input**
 
@@ -56,7 +56,7 @@
 }
 ```
 
-## 3. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T22:05:51
+## 3. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:55:18
 
 **Input**
 
@@ -71,8 +71,8 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The agent is citing a genuine external deadline regarding the Federal rate reset that is outside of their control, which is explicitly exempted.\"\n}",
+  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The agent is citing a genuine external deadline regarding the Federal Reserve rate that is outside of their control, which is explicitly exempted.\"\n}",
   "verdict": "no",
-  "justification": "The agent is citing a genuine external deadline regarding the Federal rate reset that is outside of their control, which is explicitly exempted."
+  "justification": "The agent is citing a genuine external deadline regarding the Federal Reserve rate that is outside of their control, which is explicitly exempted."
 }
 ```

@@ -34,52 +34,72 @@ from core.trajectory import TrajectoryLogger, TRAJECTORY_DIR
 RESULTS_DIR = os.path.join(REPO_ROOT, "eval", "results")
 
 
-def _blank_counts() -> dict:
-    return {"tp": 0, "fp": 0, "fn": 0, "tn": 0, "reviewed": 0, "total": 0,
-            "needs_review": 0}
-
-
 def score(predictions: Dict[str, dict], ground_truth: Dict[str, dict]) -> dict:
-    """predictions[call_id] = {reviewed: bool, policy_ids: set, needs_review: int}."""
-    c = _blank_counts()
+    """Score a system under BOTH conventions, from the same single-label
+    ground_truth.json. Predictions per call:
+        {reviewed: bool, policy_ids: set, grounded: [[line, policy_id], ...],
+         needs_review: int}
+
+    * per-call policy-set — a violation call is a TP if the correct rule is cited
+      anywhere on it; ONE false positive per call that also cites any wrong rule
+      (line number ignored). This is the lenient view.
+    * strict line-and-rule — only the grounded (line, policy_id) that EXACTLY
+      matches ground truth is a TP; every other grounded flag is its own false
+      positive. This is the strict view.
+
+    Ground truth is single-label, so when a system flags a genuinely multi-rule
+    or multi-line utterance the extra flags count against strict precision even
+    though they may be defensible — that gap (0.80 per-call vs 0.571 strict for
+    the Gemini agent on call_05/call_10) is exactly what the README Hot Take
+    explains. Both numbers are emitted so every claim is reproducible.
+    """
+    tp = fp = fn = tn = 0            # per-call policy-set
+    tp_s = fp_s = fn_s = 0           # strict line-and-rule
+    reviewed_n = needs = total = 0
     for call_id, gt in ground_truth.items():
-        pred = predictions.get(call_id, {"reviewed": False, "policy_ids": set(),
-                                         "needs_review": 0})
+        pred = predictions.get(call_id, {})
         reviewed = pred.get("reviewed", False)
         policy_ids: Set[str] = set(pred.get("policy_ids", set()))
-        c["total"] += 1
-        c["reviewed"] += 1 if reviewed else 0
-        c["needs_review"] += pred.get("needs_review", 0)
-
-        # Strict single-label scoring. A flag is correct only if it cites the
-        # ground-truth rule for that call; any other cited rule is a false alarm.
-        #   NOTE (disclosed limitation): ground truth is single-label, so if a
-        #   system flags a genuinely multi-rule utterance (e.g. "completely safe,
-        #   you can't lose money" → both P-01 and P-07) the extra rule is counted
-        #   as a false positive even though it may be defensible. In this fixture
-        #   set the agent never cites a second rule, so it is not penalized; the
-        #   effect is only to expose the keyword baseline's spurious matches
-        #   (e.g. "instead" → P-08 on call_07, "right now" → P-04 on call_08).
+        grounded = [tuple(x) for x in pred.get("grounded", [])]
+        total += 1
+        reviewed_n += 1 if reviewed else 0
+        needs += pred.get("needs_review", 0)
         gt_pid = gt.get("policy_id")
+
         if gt.get("violation"):
+            # per-call
             if reviewed and gt_pid in policy_ids:
-                c["tp"] += 1
+                tp += 1
             else:
-                c["fn"] += 1
-            wrong = (policy_ids - {gt_pid}) if reviewed else set()
-            if wrong:
-                c["fp"] += 1
+                fn += 1
+            if reviewed and (policy_ids - {gt_pid}):
+                fp += 1
+            # strict
+            target = (gt.get("line"), gt_pid)
+            if reviewed and target in grounded:
+                tp_s += 1
+            else:
+                fn_s += 1
+            fp_s += sum(1 for x in grounded if x != target) if reviewed else 0
         else:
             if reviewed and policy_ids:
-                c["fp"] += 1
+                fp += 1
             else:
-                c["tn"] += 1
+                tn += 1
+            fp_s += len(grounded) if reviewed else 0
 
-    tp, fp, fn = c["tp"], c["fp"], c["fn"]
-    c["precision"] = round(tp / (tp + fp), 3) if (tp + fp) else 0.0
-    c["recall"] = round(tp / (tp + fn), 3) if (tp + fn) else 0.0
-    c["coverage_pct"] = round(100 * c["reviewed"] / c["total"], 1) if c["total"] else 0.0
-    return c
+    def _p(t, f):
+        return round(t / (t + f), 3) if (t + f) else 0.0
+
+    return {
+        "tp": tp, "fp_per_call": fp, "fn": fn, "tn": tn,
+        "precision_per_call": _p(tp, fp), "recall_per_call": _p(tp, fn),
+        "tp_strict": tp_s, "fp_strict_line_and_rule": fp_s, "fn_strict": fn_s,
+        "precision_strict_line_and_rule": _p(tp_s, fp_s),
+        "recall_strict_line_and_rule": _p(tp_s, fn_s),
+        "reviewed": reviewed_n, "total": total, "needs_review": needs,
+        "coverage_pct": round(100 * reviewed_n / total, 1) if total else 0.0,
+    }
 
 
 def agent_predictions(transcripts, policy, policy_idx, provider) -> Dict[str, dict]:
@@ -107,6 +127,7 @@ def agent_predictions(transcripts, policy, policy_idx, provider) -> Dict[str, di
         preds[t.id] = {
             "reviewed": True,
             "policy_ids": {r.policy_id for r in grounded},
+            "grounded": sorted((r.line, r.policy_id) for r in grounded),
             "needs_review": len(needs),
         }
     models = ({"flagger": client.flagger_model, "verifier": client.verifier_model}
@@ -121,6 +142,7 @@ def keyword_predictions(transcripts) -> Dict[str, dict]:
         flags = keyword_flags(t)
         preds[t.id] = {"reviewed": True,
                        "policy_ids": {f["policy_id"] for f in flags},
+                       "grounded": sorted((f["line"], f["policy_id"]) for f in flags),
                        "needs_review": 0}
     return preds
 
@@ -133,6 +155,7 @@ def random_predictions(transcripts) -> Dict[str, dict]:
         preds[t.id] = {
             "reviewed": info["reviewed"],
             "policy_ids": {f["policy_id"] for f in info["flags"]},
+            "grounded": sorted((f["line"], f["policy_id"]) for f in info["flags"]),
             "needs_review": 0,
         }
     return preds
@@ -141,10 +164,12 @@ def random_predictions(transcripts) -> Dict[str, dict]:
 ROWS = [
     ("Coverage (% reviewed)", "coverage_pct", "%"),
     ("Violations caught (TP)", "tp", ""),
-    ("False positives", "fp", ""),
     ("False negatives", "fn", ""),
-    ("Precision", "precision", ""),
-    ("Recall", "recall", ""),
+    ("Recall", "recall_per_call", ""),
+    ("Precision — per-call", "precision_per_call", ""),
+    ("Precision — strict (line + rule)", "precision_strict_line_and_rule", ""),
+    ("False positives — per-call", "fp_per_call", ""),
+    ("False positives — strict (line + rule)", "fp_strict_line_and_rule", ""),
     ("Routed to needs-review", "needs_review", ""),
 ]
 
@@ -183,8 +208,10 @@ def render_table(scores: Dict[str, dict], provider: str, models: dict = None) ->
         "",
         "**Headline:** the keyword baseline flags the external-deadline near-miss "
         "(call_09, a false positive) and misses the implied guarantee (call_10); "
-        "the agent grounds every flag against the transcript and the one cited rule, "
-        "so it keeps 100% coverage without paying for it in false positives.",
+        "the agent reviews 100% of calls with recall 1.0. Precision is shown under "
+        "both conventions — per-call (line ignored) and strict (line + rule); the "
+        "gap is the multi-rule/multi-line flags on call_05 and call_10 that the "
+        "single-label ground truth cannot credit (see the README Hot Take).",
         "",
     ]
     return "\n".join(lines)

@@ -1,6 +1,6 @@
 [
   {
-    "timestamp": "2026-08-29T20:43:07",
+    "timestamp": "2026-08-29T23:54:16",
     "stage": "flagger",
     "model": "gemini-2.5-flash",
     "input": {
@@ -21,7 +21,7 @@
     }
   },
   {
-    "timestamp": "2026-08-29T20:43:08",
+    "timestamp": "2026-08-29T23:54:17",
     "stage": "verifier:recheck",
     "model": "gemini-flash-lite-latest",
     "input": {
@@ -29,9 +29,9 @@
       "user": "Line: \"Historically it's tracked around 6 to 8 percent, but honestly, I can guarantee you'll see at least 8% returns every year with this fund.\"\nPolicy rule P-01: \"Agents must not state or imply that any account, investment, or product will guarantee returns, gains, principal protection, or freedom from loss.\"\n"
     },
     "output": {
-      "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent explicitly stated they can guarantee at least 8% returns every year with the fund, which directly violates the policy prohibiting guaranteed returns.\"\n}",
+      "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent explicitly promised a guaranteed minimum return of 8% every year, which directly violates the policy prohibiting guaranteed returns.\"\n}",
       "verdict": "yes",
-      "justification": "The agent explicitly stated they can guarantee at least 8% returns every year with the fund, which directly violates the policy prohibiting guaranteed returns."
+      "justification": "The agent explicitly promised a guaranteed minimum return of 8% every year, which directly violates the policy prohibiting guaranteed returns."
     }
   }
 ]

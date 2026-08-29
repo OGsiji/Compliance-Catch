@@ -29,16 +29,16 @@ users without `make` can run them directly:
 | Target | Raw command |
 |---|---|
 | `make setup` | `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt` |
-| `make baseline` | the two `python -c` one-liners below (no key) |
-| `make agent` | `python -m agent.pipeline --provider gemini` |
-| `make eval` | `python -m eval.run_eval --provider gemini` |
-| `make test` | `python -m unittest discover -s tests -v` |
+| `make baseline` | the two `python3 -c` one-liners below (no key) |
+| `make agent` | `python3 -m agent.pipeline --provider gemini` |
+| `make eval` | `python3 -m eval.run_eval --provider gemini` |
+| `make test` | `python3 -m unittest discover -s tests -v` |
 | `make clean` | remove `__pycache__` dirs and `.venv` |
 
 `make baseline` raw equivalent:
 ```bash
-python -c "from core.data import load_all_transcripts as L; from baseline.keyword_match import keyword_flags as K; [print(t.id, sorted({f['policy_id'] for f in K(t)})) for t in L()]"
-python -c "from core.data import load_all_transcripts as L; from baseline.random_sample import review as R; print({k: v['reviewed'] for k, v in R(L()).items()})"
+python3 -c "from core.data import load_all_transcripts as L; from baseline.keyword_match import keyword_flags as K; [print(t.id, sorted({f['policy_id'] for f in K(t)})) for t in L()]"
+python3 -c "from core.data import load_all_transcripts as L; from baseline.random_sample import review as R; print({k: v['reviewed'] for k, v in R(L()).items()})"
 ```
 
 ## 1. The scored result — real Gemini agent
@@ -47,7 +47,7 @@ python -c "from core.data import load_all_transcripts as L; from baseline.random
 cp .env.example .env    # set GEMINI_API_KEY
 set -a; source .env; set +a
 pip install -r requirements.txt
-make eval               # or: python -m eval.run_eval --provider gemini
+make eval               # or: python3 -m eval.run_eval --provider gemini
 ```
 
 Writes `eval/results/results_gemini.md` / `.json`. Measured:
@@ -83,7 +83,7 @@ false-positive count on those two calls may vary slightly run to run.
 
 ```bash
 make test        # 9 tests, no key
-python -m eval.run_eval --provider offline   # confirms the pipeline runs end to end
+python3 -m eval.run_eval --provider offline   # confirms the pipeline runs end to end
 ```
 
 This runs the deterministic pattern-matcher (`core/heuristics.py`) so the whole
@@ -103,9 +103,9 @@ pattern-aggregation groups rules across ≥2 calls.
 
 ```bash
 pip install gTTS
-python scripts/generate_sample_audio.py
+python3 scripts/generate_sample_audio.py
 # Transcribe + run the pipeline in one step (writes nothing into the fixture set):
-python -m agent.pipeline --audio data/audio/call_01.mp3 --provider gemini
+python3 -m agent.pipeline --audio data/audio/call_01.mp3 --provider gemini
 ```
 
 ## Determinism notes

@@ -1,6 +1,6 @@
 # Trajectory — call_04
 
-## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-29T21:55:23
+## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-29T23:54:31
 
 **Input**
 
@@ -15,20 +15,20 @@
 
 ```json
 {
-  "raw": "{\n  \"flags\": [\n    {\n      \"line\": 5,\n      \"quote\": \"4.9%, but I should mention, this rate is only available if you sign up in the next 3 minutes, I have another call waiting after this.\",\n      \"policy_id\": \"P-04\",\n      \"reasoning\": \"The agent creates artificial urgency by stating the rate is only available for a limited time and mentioning another call waiting, pressuring the customer into an immediate decision.\",\n      \"severity\": \"high\"\n    }\n  ]\n}",
+  "raw": "{\n  \"flags\": [\n    {\n      \"line\": 5,\n      \"quote\": \"4.9%, but I should mention, this rate is only available if you sign up in the next 3 minutes, I have another call waiting after this.\",\n      \"policy_id\": \"P-04\",\n      \"reasoning\": \"The agent uses artificial urgency by stating a limited-time offer and mentioning another call to pressure the customer into an immediate decision.\",\n      \"severity\": \"medium\"\n    }\n  ]\n}",
   "flags": [
     {
       "line": 5,
       "quote": "4.9%, but I should mention, this rate is only available if you sign up in the next 3 minutes, I have another call waiting after this.",
       "policy_id": "P-04",
-      "reasoning": "The agent creates artificial urgency by stating the rate is only available for a limited time and mentioning another call waiting, pressuring the customer into an immediate decision.",
-      "severity": "high"
+      "reasoning": "The agent uses artificial urgency by stating a limited-time offer and mentioning another call to pressure the customer into an immediate decision.",
+      "severity": "medium"
     }
   ]
 }
 ```
 
-## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T21:55:24
+## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:54:32
 
 **Input**
 
@@ -43,8 +43,8 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent creates artificial urgency by claiming a specific financial rate is only available if the customer signs up within the next three minutes due to another waiting call.\"\n}",
+  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent creates artificial urgency by claiming the rate is only available if signed up within the next 3 minutes due to an impending call.\"\n}",
   "verdict": "yes",
-  "justification": "The agent creates artificial urgency by claiming a specific financial rate is only available if the customer signs up within the next three minutes due to another waiting call."
+  "justification": "The agent creates artificial urgency by claiming the rate is only available if signed up within the next 3 minutes due to an impending call."
 }
 ```

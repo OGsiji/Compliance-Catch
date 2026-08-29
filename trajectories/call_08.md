@@ -1,6 +1,6 @@
 # Trajectory — call_08
 
-## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-29T22:05:41
+## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-29T23:55:08
 
 **Input**
 
@@ -49,7 +49,7 @@
 }
 ```
 
-## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T22:05:42
+## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:55:09
 
 **Input**
 
@@ -64,13 +64,13 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"yes\",\n  \"policy_rule\": \"P-12\",\n  \"justification\": \"The agent attempted an upsell immediately after the customer disclosed a negative circumstance without slowing down or offering support.\"\n}",
+  "raw": "{\n  \"verdict\": \"yes\",\n  \"policy\": \"P-12\",\n  \"justification\": \"The agent attempted an upsell immediately after the customer disclosed a difficult circumstance, violating the requirement to avoid upselling.\"\n}",
   "verdict": "yes",
-  "justification": "The agent attempted an upsell immediately after the customer disclosed a negative circumstance without slowing down or offering support."
+  "justification": "The agent attempted an upsell immediately after the customer disclosed a difficult circumstance, violating the requirement to avoid upselling."
 }
 ```
 
-## 3. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T22:05:43
+## 3. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:55:10
 
 **Input**
 
@@ -85,13 +85,13 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The agent transitions to a sales pitch using opportunistic timing rather than manufacturing false urgency or pressure for an immediate decision.\"\n}",
+  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The agent transitions to a sales pitch using standard conversational framing without creating false urgency or pressure for an immediate decision.\"\n}",
   "verdict": "no",
-  "justification": "The agent transitions to a sales pitch using opportunistic timing rather than manufacturing false urgency or pressure for an immediate decision."
+  "justification": "The agent transitions to a sales pitch using standard conversational framing without creating false urgency or pressure for an immediate decision."
 }
 ```
 
-## 4. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T22:05:44
+## 4. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:55:11
 
 **Input**
 
@@ -106,13 +106,13 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The provided transcript line merely confirms setting up a request and does not involve any disclosed vulnerability or upselling.\"\n}",
+  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The line simply confirms the setup of a request without any indication that the customer disclosed a vulnerability.\"\n}",
   "verdict": "no",
-  "justification": "The provided transcript line merely confirms setting up a request and does not involve any disclosed vulnerability or upselling."
+  "justification": "The line simply confirms the setup of a request without any indication that the customer disclosed a vulnerability."
 }
 ```
 
-## 5. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T22:05:45
+## 5. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:55:12
 
 **Input**
 
@@ -127,8 +127,8 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The statement simply indicates the agent is setting up the requested service and does not show evidence of enrolling the customer into a different product without consent.\"\n}",
+  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The line merely indicates the agent is setting up what was requested and does not show enrollment in an unrequested product without consent.\"\n}",
   "verdict": "no",
-  "justification": "The statement simply indicates the agent is setting up the requested service and does not show evidence of enrolling the customer into a different product without consent."
+  "justification": "The line merely indicates the agent is setting up what was requested and does not show enrollment in an unrequested product without consent."
 }
 ```

@@ -21,6 +21,38 @@ def _agent(policy_idx):
     return Flagger(None, logger), Verifier(None, logger), logger
 
 
+class DualConventionScoring(unittest.TestCase):
+    """Locks both scoring conventions on a synthetic mirror of call_05/call_10:
+    two violation calls each grounding the right rule + a second rule, on two
+    lines, plus one clean call flagged with nothing."""
+
+    def test_per_call_and_strict_precision(self):
+        from eval.run_eval import score
+        gt = {
+            "v1": {"violation": True, "policy_id": "P-07", "line": 3},
+            "v2": {"violation": True, "policy_id": "P-01", "line": 3},
+            "clean": {"violation": False},
+        }
+        four = [(3, "P-01"), (3, "P-07"), (5, "P-01"), (5, "P-07")]
+        preds = {
+            "v1": {"reviewed": True, "policy_ids": {"P-01", "P-07"}, "grounded": four, "needs_review": 0},
+            "v2": {"reviewed": True, "policy_ids": {"P-01", "P-07"}, "grounded": four, "needs_review": 0},
+            "clean": {"reviewed": True, "policy_ids": set(), "grounded": [], "needs_review": 0},
+        }
+        s = score(preds, gt)
+        # per-call: 2 TP, 1 wrong-rule FP per call -> precision 2/(2+2)=0.5
+        self.assertEqual((s["tp"], s["fp_per_call"]), (2, 2))
+        self.assertEqual(s["precision_per_call"], 0.5)
+        # strict: only exact (line, rule) is TP; 3 extra flags per call -> 2/(2+6)
+        self.assertEqual((s["tp_strict"], s["fp_strict_line_and_rule"]), (2, 6))
+        self.assertEqual(s["precision_strict_line_and_rule"], 0.25)
+        # recall is 1.0 under both conventions (nothing missed)
+        self.assertEqual(s["recall_per_call"], 1.0)
+        self.assertEqual(s["recall_strict_line_and_rule"], 1.0)
+        # no single ambiguous "precision" field
+        self.assertNotIn("precision", s)
+
+
 class OfflineReproducesGroundTruth(unittest.TestCase):
     def test_every_fixture_matches_ground_truth(self):
         transcripts = load_all_transcripts()

@@ -1,6 +1,6 @@
 # Trajectory — call_10
 
-## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-29T10:28:01
+## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-29T23:55:24
 
 **Input**
 
@@ -15,20 +15,20 @@
 
 ```json
 {
-  "raw": "{\n  \"flags\": [\n    {\n      \"line\": 3,\n      \"quote\": \"That's a fair concern. But honestly, in the fifteen years I've sold this product, nobody's ever lost money.\",\n      \"policy_id\": \"P-01\",\n      \"reasoning\": \"The agent implies principal protection and freedom from loss by stating that nobody has ever lost money.\",\n      \"severity\": \"high\"\n    },\n    {\n      \"line\": 3,\n      \"quote\": \"That's a fair concern. But honestly, in the fifteen years I've sold this product, nobody's ever lost money.\",\n      \"policy_id\": \"P-07\",\n      \"reasoning\": \"The agent understates the risk level of an investment product by claiming nobody has ever lost money.\",\n      \"severity\": \"high\"\n    },\n    {\n      \"line\": 5,\n      \"quote\": \"There's always some risk on paper, but in practice, like I said, nobody's walked away with less than they put in.\",\n      \"policy_id\": \"P-01\",\n      \"reasoning\": \"The agent implies principal protection and freedom from loss by stating that nobody has walked away with less than they put in.\",\n      \"severity\": \"high\"\n    },\n    {\n      \"line\": 5,\n      \"quote\": \"There's always some risk on paper, but in practice, like I said, nobody's walked away with less than they put in.\",\n      \"policy_id\": \"P-07\",\n      \"reasoning\": \"The agent understates the risk level of an investment product and describes it as safe by claiming nobody has walked away with less than they put in.\",\n      \"severity\": \"high\"\n    }\n  ]\n}",
+  "raw": "{\n  \"flags\": [\n    {\n      \"line\": 3,\n      \"quote\": \"That's a fair concern. But honestly, in the fifteen years I've sold this product, nobody's ever lost money.\",\n      \"policy_id\": \"P-01\",\n      \"reasoning\": \"The agent implies a guarantee of no loss by stating that nobody has ever lost money with the product.\",\n      \"severity\": \"high\"\n    },\n    {\n      \"line\": 3,\n      \"quote\": \"That's a fair concern. But honestly, in the fifteen years I've sold this product, nobody's ever lost money.\",\n      \"policy_id\": \"P-07\",\n      \"reasoning\": \"The agent understates the risk level of an investment product by claiming no one has ever lost money.\",\n      \"severity\": \"high\"\n    },\n    {\n      \"line\": 5,\n      \"quote\": \"There's always some risk on paper, but in practice, like I said, nobody's walked away with less than they put in.\",\n      \"policy_id\": \"P-01\",\n      \"reasoning\": \"The agent implies principal protection and freedom from loss by stating that nobody has walked away with less than they put in.\",\n      \"severity\": \"high\"\n    },\n    {\n      \"line\": 5,\n      \"quote\": \"There's always some risk on paper, but in practice, like I said, nobody's walked away with less than they put in.\",\n      \"policy_id\": \"P-07\",\n      \"reasoning\": \"The agent understates the risk level of an investment product by dismissing 'risk on paper' with a claim of no practical losses.\",\n      \"severity\": \"high\"\n    }\n  ]\n}",
   "flags": [
     {
       "line": 3,
       "quote": "That's a fair concern. But honestly, in the fifteen years I've sold this product, nobody's ever lost money.",
       "policy_id": "P-01",
-      "reasoning": "The agent implies principal protection and freedom from loss by stating that nobody has ever lost money.",
+      "reasoning": "The agent implies a guarantee of no loss by stating that nobody has ever lost money with the product.",
       "severity": "high"
     },
     {
       "line": 3,
       "quote": "That's a fair concern. But honestly, in the fifteen years I've sold this product, nobody's ever lost money.",
       "policy_id": "P-07",
-      "reasoning": "The agent understates the risk level of an investment product by claiming nobody has ever lost money.",
+      "reasoning": "The agent understates the risk level of an investment product by claiming no one has ever lost money.",
       "severity": "high"
     },
     {
@@ -42,14 +42,14 @@
       "line": 5,
       "quote": "There's always some risk on paper, but in practice, like I said, nobody's walked away with less than they put in.",
       "policy_id": "P-07",
-      "reasoning": "The agent understates the risk level of an investment product and describes it as safe by claiming nobody has walked away with less than they put in.",
+      "reasoning": "The agent understates the risk level of an investment product by dismissing 'risk on paper' with a claim of no practical losses.",
       "severity": "high"
     }
   ]
 }
 ```
 
-## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T10:28:04
+## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:55:25
 
 **Input**
 
@@ -64,13 +64,13 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent explicitly implies freedom from loss by claiming that in fifteen years nobody has ever lost money.\"\n}",
+  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent explicitly implies that the product is free from loss by stating that nobody has ever lost money in fifteen years.\"\n}",
   "verdict": "yes",
-  "justification": "The agent explicitly implies freedom from loss by claiming that in fifteen years nobody has ever lost money."
+  "justification": "The agent explicitly implies that the product is free from loss by stating that nobody has ever lost money in fifteen years."
 }
 ```
 
-## 3. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T10:28:04
+## 3. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:55:26
 
 **Input**
 
@@ -85,13 +85,13 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent claims that 'nobody's ever lost money' over fifteen years, which falsely describes the investment as risk-free and understates its risk level.\"\n}",
+  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent described the product as risk-free by claiming nobody has ever lost money in fifteen years, which understates the risk level.\"\n}",
   "verdict": "yes",
-  "justification": "The agent claims that 'nobody's ever lost money' over fifteen years, which falsely describes the investment as risk-free and understates its risk level."
+  "justification": "The agent described the product as risk-free by claiming nobody has ever lost money in fifteen years, which understates the risk level."
 }
 ```
 
-## 4. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T10:28:05
+## 4. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:55:27
 
 **Input**
 
@@ -112,7 +112,7 @@
 }
 ```
 
-## 5. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T10:28:06
+## 5. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:55:28
 
 **Input**
 
@@ -127,8 +127,8 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent understates the investment risk by claiming that in practice nobody has walked away with less than they put in, contradicting the policy against describing variable-return products as safe.\"\n}",
+  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent minimizes the investment risk by stating that nobody has ever walked away with less than they put in, which contradicts the policy against describing a variable-return product as safe.\"\n}",
   "verdict": "yes",
-  "justification": "The agent understates the investment risk by claiming that in practice nobody has walked away with less than they put in, contradicting the policy against describing variable-return products as safe."
+  "justification": "The agent minimizes the investment risk by stating that nobody has ever walked away with less than they put in, which contradicts the policy against describing a variable-return product as safe."
 }
 ```

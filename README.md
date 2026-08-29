@@ -95,16 +95,21 @@ numbers against the two baselines over the same 10 held-out fixtures:
 | Metric | Random 5% | Keyword match | **Gemini agent** |
 | --- | --- | --- | --- |
 | Coverage (% reviewed) | 10% | 100% | **100%** |
-| Violations caught | 0 / 8 | 5 / 8 | **8 / 8** |
-| Recall | 0.0 | 0.63 | **1.0** |
-| Precision | 0.0 | 0.63 | **0.571** |
+| Violations caught (TP) | 0 / 8 | 5 / 8 | **8 / 8** |
+| Recall | 0.0 | 0.625 | **1.0** |
+| Precision — per-call | 0.0 | 0.625 | **0.8** |
+| Precision — strict (line + rule) | 0.0 | 0.455 | **0.571** |
 
-**Recall is 1.0 — the agent missed nothing.** Precision is **0.571 under strict
-line-and-rule scoring** (a flag counts only if its exact line *and* rule match
-the single ground-truth label). Under a per-call convention — right rule *somewhere*
-on a violation call — precision is **0.80**. The gap between the two is entirely
-call_05 and call_10, where the agent grounded extra *real* violations the answer
-key doesn't label; on the two genuinely-clean calls it flagged nothing. See the
+Every number above is emitted by `make eval` into
+[`eval/results/results_gemini.json`](eval/results/results_gemini.json) under two
+explicit conventions — `precision_per_call` and `precision_strict_line_and_rule`
+— so nothing here is hand-computed. **Recall is 1.0 — the agent missed nothing.**
+Precision is **0.571 under strict line-and-rule scoring** (a flag counts only if
+its exact line *and* rule match the single ground-truth label); under the
+per-call convention (right rule *somewhere* on a violation call) it is **0.8**.
+The gap between the two is entirely call_05 and call_10, where the agent grounded
+extra *real* violations the answer key doesn't label; on the two genuinely-clean
+calls it flagged nothing. See the
 [Hot take](#hot-take).
 
 The two cases that separate a scanner from an agent:
@@ -257,11 +262,11 @@ make test                 # no key needed
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt  # make setup
-python -m unittest discover -s tests -v          # make test  (no key)
-python -m eval.run_eval --provider gemini        # make eval
-python -m agent.pipeline --provider gemini       # make agent
-python -m eval.run_eval --provider offline       # no key: offline smoke test
-python -m agent.pipeline --call call_10 --provider gemini   # inspect one call end-to-end
+python3 -m unittest discover -s tests -v          # make test  (no key)
+python3 -m eval.run_eval --provider gemini        # make eval
+python3 -m agent.pipeline --provider gemini       # make agent
+python3 -m eval.run_eval --provider offline       # no key: offline smoke test
+python3 -m agent.pipeline --call call_10 --provider gemini   # inspect one call end-to-end
 ```
 
 ## Repo layout
@@ -284,9 +289,9 @@ flagger already consumes — nothing downstream changes.
 
 ```bash
 pip install gTTS
-python scripts/generate_sample_audio.py                         # make sample clips
+python3 scripts/generate_sample_audio.py                         # make sample clips
 # One command: transcribe the audio, then run the full pipeline on it.
-python -m agent.pipeline --audio data/audio/call_01.mp3 --provider gemini
+python3 -m agent.pipeline --audio data/audio/call_01.mp3 --provider gemini
 ```
 
 The round-trip was validated once on clean TTS audio: `call_01.mp3` transcribed

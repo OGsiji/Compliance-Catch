@@ -1,6 +1,6 @@
 # Trajectory — call_01
 
-## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-29T20:43:07
+## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-29T23:54:16
 
 **Input**
 
@@ -28,7 +28,7 @@
 }
 ```
 
-## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T20:43:08
+## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:54:17
 
 **Input**
 
@@ -43,8 +43,8 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent explicitly stated they can guarantee at least 8% returns every year with the fund, which directly violates the policy prohibiting guaranteed returns.\"\n}",
+  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent explicitly promised a guaranteed minimum return of 8% every year, which directly violates the policy prohibiting guaranteed returns.\"\n}",
   "verdict": "yes",
-  "justification": "The agent explicitly stated they can guarantee at least 8% returns every year with the fund, which directly violates the policy prohibiting guaranteed returns."
+  "justification": "The agent explicitly promised a guaranteed minimum return of 8% every year, which directly violates the policy prohibiting guaranteed returns."
 }
 ```

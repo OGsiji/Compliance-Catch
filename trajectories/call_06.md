@@ -1,6 +1,6 @@
 # Trajectory — call_06
 
-## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-29T21:56:31
+## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-29T23:54:50
 
 **Input**
 
@@ -35,7 +35,7 @@
 }
 ```
 
-## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T21:56:33
+## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:54:50
 
 **Input**
 
@@ -50,13 +50,13 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent enrolled the customer in a different tier (Premium Checking) without obtaining explicit consent for that specific upgrade.\"\n}",
+  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent enrolled the customer in a different tier without obtaining explicit consent first.\"\n}",
   "verdict": "yes",
-  "justification": "The agent enrolled the customer in a different tier (Premium Checking) without obtaining explicit consent for that specific upgrade."
+  "justification": "The agent enrolled the customer in a different tier without obtaining explicit consent first."
 }
 ```
 
-## 3. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T21:56:36
+## 3. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-29T23:54:51
 
 **Input**
 
@@ -71,8 +71,8 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The fee is being stated to the customer during the discussion, which complies with the rule to clearly state fees before commitment.\"\n}",
+  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The fee is being stated to the customer during the discussion, which complies with the requirement to disclose fees before commitment.\"\n}",
   "verdict": "no",
-  "justification": "The fee is being stated to the customer during the discussion, which complies with the rule to clearly state fees before commitment."
+  "justification": "The fee is being stated to the customer during the discussion, which complies with the requirement to disclose fees before commitment."
 }
 ```
