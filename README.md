@@ -301,6 +301,16 @@ rate limit, see the official pricing:
 <https://ai.google.dev/gemini-api/docs/pricing>. `REPRODUCTION.md`
 has the full cost/runtime breakdown and the exact model IDs used.
 
+**Exact models and what the reproducibility guarantee actually is.** This run
+used `gemini-2.5-flash` (flagger) and `gemini-flash-lite-latest` (verifier).
+Note that `-latest` is a **mutable Google alias**: it can resolve to a different
+underlying model in the future, so a fresh run months from now may not match
+bit-for-bit. The guarantee is not that re-running reproduces identical output —
+it's that `eval/results/results_gemini.json` and the committed
+[`/trajectories`](trajectories) directory are the **frozen, immutable record** of
+this run's exact behavior (every flagger/verifier prompt, response, and routing
+decision), independent of any future model drift.
+
 ---
 
 ## Running it yourself
@@ -313,7 +323,7 @@ or API key; `make agent` / `make eval` need a `GEMINI_API_KEY`.
 | Command | What it does | Needs key? |
 | --- | --- | --- |
 | `make setup` | create the venv and install dependencies | — |
-| `make test` | run the 9-test suite | no |
+| `make test` | run the 11-test suite | no |
 | `make baseline` | run both baselines over the fixtures | no |
 | `make agent` | run the Gemini agent over all transcripts | yes |
 | `make eval` | score baselines + agent vs. ground truth (writes `eval/results/`) | yes |

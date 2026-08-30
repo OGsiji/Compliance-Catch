@@ -6,7 +6,11 @@
 # Use the project venv's python if it exists, else the system python3.
 PYTHON := $(shell [ -x .venv/bin/python ] && echo .venv/bin/python || echo python3)
 
-.PHONY: help setup baseline agent eval test clean
+.PHONY: help setup baseline agent call eval test clean
+
+# Override on the command line: make call CALL=call_09 PROVIDER=gemini
+CALL ?= call_10
+PROVIDER ?= gemini
 
 help:  ## show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
@@ -22,6 +26,9 @@ baseline:  ## run the two baselines over the fixtures (no API key needed)
 
 agent:  ## run the Gemini agent over all transcripts (needs GEMINI_API_KEY)
 	set -a; [ -f .env ] && . ./.env; set +a; $(PYTHON) -m agent.pipeline --provider gemini
+
+call:  ## run one call: make call CALL=call_09 [PROVIDER=gemini|offline]
+	set -a; [ -f .env ] && . ./.env; set +a; $(PYTHON) -m agent.pipeline --call $(CALL) --provider $(PROVIDER)
 
 eval:  ## score baselines + Gemini agent vs ground truth (needs GEMINI_API_KEY)
 	set -a; [ -f .env ] && . ./.env; set +a; $(PYTHON) -m eval.run_eval --provider gemini

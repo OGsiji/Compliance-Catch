@@ -31,9 +31,15 @@ users without `make` can run them directly:
 | `make setup` | `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt` |
 | `make baseline` | the two `python3 -c` one-liners below (no key) |
 | `make agent` | `python3 -m agent.pipeline --provider gemini` |
+| `make call CALL=call_09` | `python3 -m agent.pipeline --call call_09 --provider gemini` |
 | `make eval` | `python3 -m eval.run_eval --provider gemini` |
 | `make test` | `python3 -m unittest discover -s tests -v` |
 | `make clean` | remove `__pycache__` dirs and `.venv` |
+
+`make call` runs a **single** call instead of all ten. Override `CALL` (default
+`call_10`) and optionally `PROVIDER` (default `gemini`, or `offline` for the
+no-key smoke path): `make call CALL=call_09 PROVIDER=offline`. Run it once per
+call, e.g. `make call CALL=call_09` then `make call CALL=call_10`.
 
 `make baseline` raw equivalent:
 ```bash
