@@ -214,7 +214,7 @@ ROWS = [
 
 # Columns, left to right: baselines, then the ablation, then the full system.
 SYSTEMS = [
-    ("Random 5%", "random"),
+    ("Random 5% rate", "random"),
     ("Keyword match", "keyword"),
     ("Flagger only (no verifier)", "flagger_only"),
     ("Agent (full)", "agent"),

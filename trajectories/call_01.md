@@ -1,6 +1,6 @@
 # Trajectory — call_01
 
-## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-30T00:01:32
+## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-30T07:29:11
 
 **Input**
 
@@ -15,20 +15,20 @@
 
 ```json
 {
-  "raw": "{\n  \"flags\": [\n    {\n      \"line\": 7,\n      \"quote\": \"Historically it's tracked around 6 to 8 percent, but honestly, I can guarantee you'll see at least 8% returns every year with this fund.\",\n      \"policy_id\": \"P-01\",\n      \"reasoning\": \"The agent explicitly guarantees a specific return percentage for an investment fund, which violates the policy against guaranteeing returns.\",\n      \"severity\": \"high\"\n    }\n  ]\n}",
+  "raw": "{\n  \"flags\": [\n    {\n      \"line\": 7,\n      \"quote\": \"Historically it's tracked around 6 to 8 percent, but honestly, I can guarantee you'll see at least 8% returns every year with this fund.\",\n      \"policy_id\": \"P-01\",\n      \"reasoning\": \"The agent explicitly guarantees a minimum return of 8% every year, which violates the policy against guaranteeing returns for investment products.\",\n      \"severity\": \"high\"\n    }\n  ]\n}",
   "flags": [
     {
       "line": 7,
       "quote": "Historically it's tracked around 6 to 8 percent, but honestly, I can guarantee you'll see at least 8% returns every year with this fund.",
       "policy_id": "P-01",
-      "reasoning": "The agent explicitly guarantees a specific return percentage for an investment fund, which violates the policy against guaranteeing returns.",
+      "reasoning": "The agent explicitly guarantees a minimum return of 8% every year, which violates the policy against guaranteeing returns for investment products.",
       "severity": "high"
     }
   ]
 }
 ```
 
-## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T00:01:33
+## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T07:29:12
 
 **Input**
 
@@ -43,8 +43,8 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent explicitly stated they can guarantee at least 8% returns every year with the fund, which directly violates the policy prohibiting guaranteed returns.\"\n}",
+  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent explicitly stated they can guarantee at least 8% returns every year with the fund, which directly violates the policy against guaranteeing returns.\"\n}",
   "verdict": "yes",
-  "justification": "The agent explicitly stated they can guarantee at least 8% returns every year with the fund, which directly violates the policy prohibiting guaranteed returns."
+  "justification": "The agent explicitly stated they can guarantee at least 8% returns every year with the fund, which directly violates the policy against guaranteeing returns."
 }
 ```

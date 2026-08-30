@@ -1,6 +1,6 @@
 # Trajectory — call_06
 
-## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-30T00:02:05
+## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-30T07:29:46
 
 **Input**
 
@@ -35,7 +35,7 @@
 }
 ```
 
-## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T00:02:05
+## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T07:29:47
 
 **Input**
 
@@ -50,13 +50,13 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent enrolled the customer in a different tier (Premium Checking) without obtaining explicit, recorded consent first.\"\n}",
+  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent enrolled the customer in a different tier without obtaining explicit consent first.\"\n}",
   "verdict": "yes",
-  "justification": "The agent enrolled the customer in a different tier (Premium Checking) without obtaining explicit, recorded consent first."
+  "justification": "The agent enrolled the customer in a different tier without obtaining explicit consent first."
 }
 ```
 
-## 3. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T00:02:06
+## 3. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T07:29:48
 
 **Input**
 
@@ -71,8 +71,8 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The fee is being stated to the customer before any commitment is made.\"\n}",
+  "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The fee is being stated to the customer during the conversation before any commitment has been made.\"\n}",
   "verdict": "no",
-  "justification": "The fee is being stated to the customer before any commitment is made."
+  "justification": "The fee is being stated to the customer during the conversation before any commitment has been made."
 }
 ```

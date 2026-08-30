@@ -1,6 +1,6 @@
 [
   {
-    "timestamp": "2026-08-30T00:01:45",
+    "timestamp": "2026-08-30T07:29:24",
     "stage": "flagger",
     "model": "gemini-2.5-flash",
     "input": {
@@ -21,7 +21,7 @@
     }
   },
   {
-    "timestamp": "2026-08-30T00:01:46",
+    "timestamp": "2026-08-30T07:29:24",
     "stage": "verifier:recheck",
     "model": "gemini-flash-lite-latest",
     "input": {
@@ -29,9 +29,9 @@
       "user": "Line: \"Okay Lena, let me pull that up... your checking account balance is $3,214.60, and you have a pending transfer of $500 going out tomorrow.\"\nPolicy rule P-03: \"Account-specific details (balance, transaction history, personal information) may not be discussed until the customer's identity has been verified using at least two identifiers.\"\n"
     },
     "output": {
-      "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent discussed the customer's checking account balance and pending transfer details without any mention of identity verification having taken place.\"\n}",
+      "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent discussed the customer's checking account balance and pending transfer details without mentioning any prior identity verification.\"\n}",
       "verdict": "yes",
-      "justification": "The agent discussed the customer's checking account balance and pending transfer details without any mention of identity verification having taken place."
+      "justification": "The agent discussed the customer's checking account balance and pending transfer details without mentioning any prior identity verification."
     }
   }
 ]

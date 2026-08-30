@@ -1,6 +1,6 @@
 [
   {
-    "timestamp": "2026-08-30T00:02:05",
+    "timestamp": "2026-08-30T07:29:46",
     "stage": "flagger",
     "model": "gemini-2.5-flash",
     "input": {
@@ -28,7 +28,7 @@
     }
   },
   {
-    "timestamp": "2026-08-30T00:02:05",
+    "timestamp": "2026-08-30T07:29:47",
     "stage": "verifier:recheck",
     "model": "gemini-flash-lite-latest",
     "input": {
@@ -36,13 +36,13 @@
       "user": "Line: \"Actually, I went ahead and enrolled you in our Premium Checking tier instead since it has more features.\"\nPolicy rule P-08: \"Agents must not enroll or upgrade a customer into a different product than the one requested without explicit, recorded consent.\"\n"
     },
     "output": {
-      "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent enrolled the customer in a different tier (Premium Checking) without obtaining explicit, recorded consent first.\"\n}",
+      "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent enrolled the customer in a different tier without obtaining explicit consent first.\"\n}",
       "verdict": "yes",
-      "justification": "The agent enrolled the customer in a different tier (Premium Checking) without obtaining explicit, recorded consent first."
+      "justification": "The agent enrolled the customer in a different tier without obtaining explicit consent first."
     }
   },
   {
-    "timestamp": "2026-08-30T00:02:06",
+    "timestamp": "2026-08-30T07:29:48",
     "stage": "verifier:recheck",
     "model": "gemini-flash-lite-latest",
     "input": {
@@ -50,9 +50,9 @@
       "user": "Line: \"There's a $12 monthly fee, but you'll get better perks.\"\nPolicy rule P-02: \"Any fee, penalty, charge, or rate relevant to the product being discussed must be clearly stated to the customer before they commit to opening, upgrading, or purchasing it.\"\n"
     },
     "output": {
-      "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The fee is being stated to the customer before any commitment is made.\"\n}",
+      "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The fee is being stated to the customer during the conversation before any commitment has been made.\"\n}",
       "verdict": "no",
-      "justification": "The fee is being stated to the customer before any commitment is made."
+      "justification": "The fee is being stated to the customer during the conversation before any commitment has been made."
     }
   }
 ]

@@ -1,6 +1,6 @@
 # Trajectory — call_10
 
-## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-30T00:02:38
+## 1. flagger  ·  `gemini-2.5-flash`  ·  2026-08-30T07:30:20
 
 **Input**
 
@@ -49,7 +49,7 @@
 }
 ```
 
-## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T00:02:38
+## 2. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T07:30:21
 
 **Input**
 
@@ -64,13 +64,13 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The statement implies freedom from loss by claiming that in fifteen years nobody has ever lost money.\"\n}",
+  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent implies freedom from loss by claiming that nobody has ever lost money in fifteen years of selling the product.\"\n}",
   "verdict": "yes",
-  "justification": "The statement implies freedom from loss by claiming that in fifteen years nobody has ever lost money."
+  "justification": "The agent implies freedom from loss by claiming that nobody has ever lost money in fifteen years of selling the product."
 }
 ```
 
-## 3. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T00:02:39
+## 3. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T07:30:22
 
 **Input**
 
@@ -85,13 +85,13 @@
 
 ```json
 {
-  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent claims that 'nobody's ever lost money' over fifteen years, which describes a variable-return product as risk-free and understates its investment risk.\"\n}",
+  "raw": "{\n  \"verdict\": \"yes\",\n  \"justification\": \"The agent claims that 'nobody's ever lost money' over fifteen years, which understates the investment risk and implies the product is risk-free.\"\n}",
   "verdict": "yes",
-  "justification": "The agent claims that 'nobody's ever lost money' over fifteen years, which describes a variable-return product as risk-free and understates its investment risk."
+  "justification": "The agent claims that 'nobody's ever lost money' over fifteen years, which understates the investment risk and implies the product is risk-free."
 }
 ```
 
-## 4. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T00:02:40
+## 4. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T07:30:22
 
 **Input**
 
@@ -112,7 +112,7 @@
 }
 ```
 
-## 5. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T00:02:41
+## 5. verifier:recheck  ·  `gemini-flash-lite-latest`  ·  2026-08-30T07:30:23
 
 **Input**
 

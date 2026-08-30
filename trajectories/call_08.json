@@ -1,6 +1,6 @@
 [
   {
-    "timestamp": "2026-08-30T00:02:24",
+    "timestamp": "2026-08-30T07:30:05",
     "stage": "flagger",
     "model": "gemini-2.5-flash",
     "input": {
@@ -42,7 +42,7 @@
     }
   },
   {
-    "timestamp": "2026-08-30T00:02:24",
+    "timestamp": "2026-08-30T07:30:05",
     "stage": "verifier:recheck",
     "model": "gemini-flash-lite-latest",
     "input": {
@@ -50,13 +50,13 @@
       "user": "Line: \"I'm sorry to hear that. While I have you, this is actually a great time to enroll in our premium advisory package, it's just $40 a month.\"\nPolicy rule P-12: \"If a customer discloses a circumstance suggesting vulnerability (cognitive difficulty, recent bereavement, financial hardship), the agent must slow down, offer to involve a trusted third party, and avoid upselling.\"\n"
     },
     "output": {
-      "raw": "{\n  \"verdict\": \"yes\",\n  \"policy\": \"P-12\",\n  \"justification\": \"The agent attempted an upsell immediately after the customer disclosed a difficult circumstance.\"\n}",
+      "raw": "{\n  \"verdict\": \"yes\",\n  \"policy\": \"P-12\",\n  \"justification\": \"The agent attempted an upsell immediately after the customer disclosed a difficult circumstance, violating the requirement to avoid upselling.\"\n}",
       "verdict": "yes",
-      "justification": "The agent attempted an upsell immediately after the customer disclosed a difficult circumstance."
+      "justification": "The agent attempted an upsell immediately after the customer disclosed a difficult circumstance, violating the requirement to avoid upselling."
     }
   },
   {
-    "timestamp": "2026-08-30T00:02:25",
+    "timestamp": "2026-08-30T07:30:06",
     "stage": "verifier:recheck",
     "model": "gemini-flash-lite-latest",
     "input": {
@@ -64,13 +64,13 @@
       "user": "Line: \"I'm sorry to hear that. While I have you, this is actually a great time to enroll in our premium advisory package, it's just $40 a month.\"\nPolicy rule P-04: \"Agents must not use artificial urgency to pressure a customer into an immediate decision on a financial product.\"\n"
     },
     "output": {
-      "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The agent transitions to a sales pitch using standard conversational framing rather than manufacturing artificial urgency or pressure for an immediate decision.\"\n}",
+      "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The agent transitions to a sales pitch using standard conversational filler rather than manufacturing artificial urgency or pressure for an immediate decision.\"\n}",
       "verdict": "no",
-      "justification": "The agent transitions to a sales pitch using standard conversational framing rather than manufacturing artificial urgency or pressure for an immediate decision."
+      "justification": "The agent transitions to a sales pitch using standard conversational filler rather than manufacturing artificial urgency or pressure for an immediate decision."
     }
   },
   {
-    "timestamp": "2026-08-30T00:02:26",
+    "timestamp": "2026-08-30T07:30:07",
     "stage": "verifier:recheck",
     "model": "gemini-flash-lite-latest",
     "input": {
@@ -78,13 +78,13 @@
       "user": "Line: \"Great, I'll get that set up for you right now.\"\nPolicy rule P-12: \"If a customer discloses a circumstance suggesting vulnerability (cognitive difficulty, recent bereavement, financial hardship), the agent must slow down, offer to involve a trusted third party, and avoid upselling.\"\n"
     },
     "output": {
-      "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The provided transcript line merely confirms setting up a request and does not involve any disclosure of vulnerability by the customer.\"\n}",
+      "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The provided transcript line merely confirms setting up a request and does not involve any disclosed vulnerability or upselling.\"\n}",
       "verdict": "no",
-      "justification": "The provided transcript line merely confirms setting up a request and does not involve any disclosure of vulnerability by the customer."
+      "justification": "The provided transcript line merely confirms setting up a request and does not involve any disclosed vulnerability or upselling."
     }
   },
   {
-    "timestamp": "2026-08-30T00:02:27",
+    "timestamp": "2026-08-30T07:30:07",
     "stage": "verifier:recheck",
     "model": "gemini-flash-lite-latest",
     "input": {
@@ -92,9 +92,9 @@
       "user": "Line: \"Great, I'll get that set up for you right now.\"\nPolicy rule P-08: \"Agents must not enroll or upgrade a customer into a different product than the one requested without explicit, recorded consent.\"\n"
     },
     "output": {
-      "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The line merely indicates the agent is setting up the requested product and does not show an enrollment or upgrade into an unrequested product without consent.\"\n}",
+      "raw": "{\n  \"verdict\": \"no\",\n  \"justification\": \"The statement merely confirms the setup of a requested product and does not indicate an enrollment or upgrade into a different, unrequested product.\"\n}",
       "verdict": "no",
-      "justification": "The line merely indicates the agent is setting up the requested product and does not show an enrollment or upgrade into an unrequested product without consent."
+      "justification": "The statement merely confirms the setup of a requested product and does not indicate an enrollment or upgrade into a different, unrequested product."
     }
   }
 ]

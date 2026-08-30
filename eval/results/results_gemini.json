@@ -70,7 +70,7 @@
       "recall_strict_line_and_rule": 1.0,
       "reviewed": 10,
       "total": 10,
-      "needs_review": 5,
+      "needs_review": 6,
       "coverage_pct": 100.0
     }
   },
