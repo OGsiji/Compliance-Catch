@@ -148,9 +148,9 @@ The two cases that separate a scanner from an agent:
 ### What this means for the user
 
 | Metric | Simple baseline | Agent solution | Change |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Primary outcome** (violations caught) | Random 5% rate: 0/8 @ 10% coverage · Keyword: 5/8 @ 100% coverage | 8/8 @ 100% coverage (recall 1.0) | +3 caught vs. keyword; full coverage vs. random |
-| **Cost per call** | $0 (no API calls in either baseline) | ≈$0.0013 (approximate — see note below) | Not a savings claim: the agent has a real, small marginal cost the baselines don't. The point is coverage, not cost avoidance — see Primary outcome. |
+| **Cost per call** | $0 (no API calls in either baseline) | ≈$0.0013 (approximate — mix of free-tier and billed calls, see note below) | Not a savings claim: the agent has a real, small marginal cost the baselines don't. The point is coverage, not cost avoidance — see Primary outcome. |
 | **Human time per task** | Not measured | Not measured | Not measured — disclosed gap, see note below |
 
 **Primary outcome — catching real violations.** The agent catches all 8
@@ -159,11 +159,15 @@ the random-sample baseline's 10% coverage and 0 caught. That is the point: full
 coverage, with every reported flag source-cited and rule-checked.
 
 **Cost per call — approximate (character-count based, not exact tokens).**
+This run used a mix of free-tier and billed API calls — most calls stayed within
+Gemini's free tier; a small number were billed at standard rates. The exact amount
+billed wasn't separately logged, so the approximation below is the best available
+estimate of real cost for this run, not a free-tier-only hypothetical.
 Token-usage metadata was not logged, so this is computed by tokenizing the actual
 prompt+response text captured in the trajectories at ~4 characters/token, then
 applying Gemini's published rates per stage separately — the flagger on
 `gemini-2.5-flash`, the verifier on a `gemini-flash-lite` tier. That comes to
-**≈ $0.013 for the whole 10-call run, i.e. ≈ $0.0013 per call (~0.13 of a cent)**.
+**≈ $0.013 for the whole 10-call run, i.e. ≈ $0.0013 per call (\~0.13 of a cent)**.
 Treat this as order-of-magnitude only: it is a **character-count approximation,
 not exact token counts**, and per-token prices may have changed since last
 checked — verify at the [pricing page](https://ai.google.dev/gemini-api/docs/pricing).
