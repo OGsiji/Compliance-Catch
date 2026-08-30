@@ -88,7 +88,7 @@ changed as a result:
 | Stage | What you tried and why | Evidence | Decision / Learning |
 | --- | --- | --- | --- |
 | **Baselines + fixtures** | Build 10 fixtures + held-out ground truth, then the two baselines, to quantify the gap before any agent. | Keyword: 5/8 caught, 3 false positives. Random 5%: 1/10 calls reviewed. | Bar set: 100% coverage is the prize; keyword's false alarms are the quality gap to beat. |
-| **Offline smoke test** | Deterministic pattern-matcher so the whole flag→verify→route→score path runs with no key. | Pipeline runs end to end; 11 tests pass with zero credentials. | Keep it as CI/plumbing only — its pattern list is fitted to the fixtures, so its score is not a result. |
+| **Offline smoke test** | Deterministic pattern-matcher so the whole flag→verify→route→score path runs with no key. | Pipeline runs end to end; 11 tests pass with zero credentials. | Keep it as a plumbing/smoke check only — its pattern list is fitted to the fixtures, so its score is not a result. |
 | **First Gemini run** | Wire the real model and run the full eval. | Hit `429`/`503` on the free tier; 2 calls dropped, coverage fell to 80%. | Added retry-with-backoff (honoring the server's delay) + per-call isolation; moved the flagger to `gemini-2.5-flash` for a larger free quota. |
 | **Precision audit** | Suspicious that "2 false positives" was too clean, audited every grounded flag line-by-line. | The harness's per-call convention reported 2 FPs (precision 0.80); a line-aware count found **6** real extra flags (0.571) — the convention was hiding 4. | Report precision as a range and lead with the strict 0.571; save per-call detail for audit. |
 | **Ground-truth finding** | Read the actual reasoning behind the extra flags on call_05/call_10. | All extra flags are verbatim, quote-checked lines; both clean calls flagged nothing. | These are additional defensible policy interpretations not represented by the single-label ground truth, not the agent over-flagging (see Hot take). Future work: multi-label ground truth. |
@@ -140,7 +140,7 @@ The two cases that separate a scanner from an agent:
 
 The pipeline also runs with **no API key**, via a deterministic pattern-matcher
 (`core/heuristics.py`). Its *only* purpose is to confirm the whole
-flag → verify → route → score path executes end to end — for CI and for reading
+flag → verify → route → score path executes end to end — for local plumbing checks and reading
 the code without credentials. **It is not a second agent and its scores are not
 reported as results.** Its pattern list was written with knowledge of these 10
 fixtures — it literally contains phrases like `"nobody's walked away with less"`

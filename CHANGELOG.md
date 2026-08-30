@@ -13,8 +13,6 @@
 ### Added
 - `pyproject.toml` (installable package, pinned `google-genai==1.47.0`, optional
   `audio` extra) and a pinned `requirements.txt`.
-- GitHub Actions CI running the test suite, baselines, and the offline smoke eval
-  on Python 3.9/3.11/3.12 — with **no API key** — on every push.
 
 ## 0.3.0 — honest positioning + tooling
 

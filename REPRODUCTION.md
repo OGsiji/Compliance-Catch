@@ -92,8 +92,7 @@ This runs the deterministic pattern-matcher (`core/heuristics.py`) so the whole
 flag → verify → route → score path executes without credentials. **Its scores are
 not a result.** The pattern list was written with knowledge of these 10 fixtures
 (it contains literal phrases from the transcripts), so a perfect offline score is
-expected and meaningless as evidence of general capability. It exists to prove
-the plumbing, and for CI.
+expected and meaningless as evidence of general capability. It exists to prove the plumbing.
 
 The 11 tests cover: the pipeline runs end to end on all 10 fixtures; the
 programmatic quote check rejects fabricated quotes and wrong line numbers and
