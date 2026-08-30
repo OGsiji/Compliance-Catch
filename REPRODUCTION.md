@@ -53,7 +53,7 @@ make eval               # or: python3 -m eval.run_eval --provider gemini
 Writes `eval/results/results_gemini.md` / `.json`. Measured (same 4-system,
 dual-convention table as the README, to keep the two documents from drifting):
 
-| Metric | Random 5% | Keyword match | Flagger only (no verifier) | **Gemini agent (full)** |
+| Metric | Random 5% rate | Keyword match | Flagger only (no verifier) | **Gemini agent (full)** |
 | --- | --- | --- | --- | --- |
 | Coverage (% reviewed) | 10% | 100% | 100% | **100%** |
 | Violations caught (TP) | 0 / 8 | 5 / 8 | 8 / 8 | **8 / 8** |

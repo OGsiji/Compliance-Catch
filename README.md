@@ -109,7 +109,7 @@ The system scored as "the agent" is the **real Gemini pipeline**. Its measured
 numbers against the two baselines and a flagger-only ablation, over the same 10
 held-out fixtures:
 
-| Metric | Random 5% | Keyword match | Flagger only (no verifier) | **Gemini agent (full)** |
+| Metric | Random 5% rate | Keyword match | Flagger only (no verifier) | **Gemini agent (full)** |
 | --- | --- | --- | --- | --- |
 | Coverage (% reviewed) | 10% | 100% | 100% | **100%** |
 | Violations caught (TP) | 0 / 8 | 5 / 8 | 8 / 8 | **8 / 8** |
