@@ -98,6 +98,13 @@ changed as a result:
 
 ## Evaluation results
 
+**Primary outcome: recall at 100% call coverage.** Compliance Catch reviewed
+every evaluation call and found all 8 labeled violations (recall 1.0), versus
+5 of 8 for the keyword baseline reviewing the same 100% and 0 of 8 for the random
+baseline reviewing only 10% of calls. Strict-scored precision (0.571) is reported
+as the honesty guardrail on that recall claim, and the flagger-only ablation
+shows where that precision actually comes from.
+
 The system scored as "the agent" is the **real Gemini pipeline**. Its measured
 numbers against the two baselines and a flagger-only ablation, over the same 10
 held-out fixtures:
