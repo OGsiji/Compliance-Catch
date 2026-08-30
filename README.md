@@ -147,6 +147,12 @@ The two cases that separate a scanner from an agent:
 
 ### What this means for the user
 
+| Metric | Simple baseline | Agent solution | Change |
+|---|---|---|---|
+| **Primary outcome** (violations caught) | Random 5% rate: 0/8 @ 10% coverage · Keyword: 5/8 @ 100% coverage | 8/8 @ 100% coverage (recall 1.0) | +3 caught vs. keyword; full coverage vs. random |
+| **Cost per call** | $0 (no API calls in either baseline) | ≈$0.0013 (approximate — see note below) | Not a savings claim: the agent has a real, small marginal cost the baselines don't. The point is coverage, not cost avoidance — see Primary outcome. |
+| **Human time per task** | Not measured | Not measured | Not measured — disclosed gap, see note below |
+
 **Primary outcome — catching real violations.** The agent catches all 8
 violations across the 10 calls (recall 1.0) while reviewing 100% of them, versus
 the random-sample baseline's 10% coverage and 0 caught. That is the point: full
