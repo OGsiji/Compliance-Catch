@@ -326,8 +326,11 @@ or API key; `make agent` / `make eval` need a `GEMINI_API_KEY`.
 | `make test` | run the 11-test suite | no |
 | `make baseline` | run both baselines over the fixtures | no |
 | `make agent` | run the Gemini agent over all transcripts | yes |
+| `make call CALL=call_09` | run one call (set `CALL`; `PROVIDER=gemini` or `offline`) | yes* |
 | `make eval` | score baselines + agent vs. ground truth (writes `eval/results/`) | yes |
 | `make clean` | remove caches and the venv | — |
+
+<sub>* `make call` needs a key only with `PROVIDER=gemini` (the default); `PROVIDER=offline` runs the no-key smoke path.</sub>
 
 ```bash
 make setup
