@@ -9,8 +9,9 @@ text and the specific rule it cites.
 Compliance and QA teams at banks, lenders, and insurers have to check call-center
 conversations for rule-breaking (illegal guarantees, undisclosed fees, high-pressure
 tactics, skipped identity checks). The bottleneck is coverage: a human team can
-only manually spot-check a **tiny fraction** of calls — our random-sample baseline
-reviews **\~5%**. Everything else goes unreviewed. Compliance Catch reviews **100%**
+only manually spot-check a **tiny fraction** of calls — our baseline samples at a
+**5% rate**, which on this 10-call fixture set rounds up to **1 reviewed call
+(10% coverage)**. Everything else goes unreviewed. Compliance Catch reviews **100%**
 of calls and grounds every flag it raises, so a reviewer's time goes to confirmed,
 quoted, rule-cited findings instead of listening to calls at random.
 
@@ -72,10 +73,11 @@ path falls back to a deterministic offline pattern-matcher — a smoke test only
 Two baselines set the bar the agent has to beat, each a fair stand-in for how the
 problem gets handled without an agent:
 
-- **Random 5% sample** — reviews ~5% of calls (seeded, reproducible) and reports
-  only what that slice catches. This *is* the status quo: it mirrors the manual
-  spot-check rate a human team actually sustains, so it's the honest measure of
-  the coverage gap.
+- **Random 5% sample** — samples calls at a **5% rate** (seeded, reproducible);
+  on this 10-call set that rounds up to **1 reviewed call = 10% coverage** (the
+  measured number in the table), reporting only what that slice catches. This
+  *is* the status quo: it mirrors the manual spot-check rate a human team
+  actually sustains, so it's the honest measure of the coverage gap.
 - **Keyword match** — a short keyword/regex list per rule, scanning 100% of
   calls with no grounding. This is the "simple script" a team would realistically
   build first, so it's the fair bar for whether the LLM agent earns its keep.
@@ -87,7 +89,7 @@ changed as a result:
 
 | Stage | What you tried and why | Evidence | Decision / Learning |
 | --- | --- | --- | --- |
-| **Baselines + fixtures** | Build 10 fixtures + held-out ground truth, then the two baselines, to quantify the gap before any agent. | Keyword: 5/8 caught, 3 false positives. Random 5%: 1/10 calls reviewed. | Bar set: 100% coverage is the prize; keyword's false alarms are the quality gap to beat. |
+| **Baselines + fixtures** | Build 10 fixtures + held-out ground truth, then the two baselines, to quantify the gap before any agent. | Keyword: 5/8 caught, 3 false positives. Random 5% rate: 1/10 calls reviewed (10% coverage). | Bar set: 100% coverage is the prize; keyword's false alarms are the quality gap to beat. |
 | **Offline smoke test** | Deterministic pattern-matcher so the whole flag→verify→route→score path runs with no key. | Pipeline runs end to end; 11 tests pass with zero credentials. | Keep it as a plumbing/smoke check only — its pattern list is fitted to the fixtures, so its score is not a result. |
 | **First Gemini run** | Wire the real model and run the full eval. | Hit `429`/`503` on the free tier; 2 calls dropped, coverage fell to 80%. | Added retry-with-backoff (honoring the server's delay) + per-call isolation; moved the flagger to `gemini-2.5-flash` for a larger free quota. |
 | **Precision audit** | Suspicious that "2 false positives" was too clean, audited every grounded flag line-by-line. | The harness's per-call convention reported 2 FPs (precision 0.80); a line-aware count found **6** real extra flags (0.571) — the convention was hiding 4. | Report precision as a range and lead with the strict 0.571; save per-call detail for audit. |
@@ -143,14 +145,16 @@ violations across the 10 calls (recall 1.0) while reviewing 100% of them, versus
 the random-sample baseline's 10% coverage and 0 caught. That is the point: full
 coverage, with every reported flag source-cited and rule-checked.
 
-**Cost per call — not precisely captured.** The trajectories log the full prompt
-and response *text* for every call, but not `usage_metadata` (token counts), so
-an exact billed cost cannot be computed from the committed logs. For order of
-magnitude only: tokenizing the logged text (~4 chars/token) is roughly **2,000
-tokens per call** (~15k input + ~5k output across the 10 calls), which at
-Gemini's published Flash / Flash-Lite rates is well under a cent per call — see
-the [pricing page](https://ai.google.dev/gemini-api/docs/pricing). Logging
-`usage_metadata` per call is the clean next step for an exact figure.
+**Cost per call — approximate (character-count based, not exact tokens).**
+Token-usage metadata was not logged, so this is computed by tokenizing the actual
+prompt+response text captured in the trajectories at ~4 characters/token, then
+applying Gemini's published rates per stage separately — the flagger on
+`gemini-2.5-flash`, the verifier on a `gemini-flash-lite` tier. That comes to
+**≈ $0.013 for the whole 10-call run, i.e. ≈ $0.0013 per call (~0.13 of a cent)**.
+Treat this as order-of-magnitude only: it is a **character-count approximation,
+not exact token counts**, and per-token prices may have changed since last
+checked — verify at the [pricing page](https://ai.google.dev/gemini-api/docs/pricing).
+Logging `usage_metadata` per call is the clean next step for an exact figure.
 
 **Human time per task — not measured.** No real compliance reviewer was timed
 against either the baseline or the agent's output in this evaluation, so we make
