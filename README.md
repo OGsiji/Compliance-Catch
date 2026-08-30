@@ -136,6 +136,27 @@ The two cases that separate a scanner from an agent:
   implied guarantee with no keyword to match. The keyword baseline misses it
   (**false negative**); the agent grounds it.
 
+### What this means for the user
+
+**Primary outcome — catching real violations.** The agent catches all 8
+violations across the 10 calls (recall 1.0) while reviewing 100% of them, versus
+the random-sample baseline's 10% coverage and 0 caught. That is the point: full
+coverage, with every reported flag source-cited and rule-checked.
+
+**Cost per call — not precisely captured.** The trajectories log the full prompt
+and response *text* for every call, but not `usage_metadata` (token counts), so
+an exact billed cost cannot be computed from the committed logs. For order of
+magnitude only: tokenizing the logged text (~4 chars/token) is roughly **2,000
+tokens per call** (~15k input + ~5k output across the 10 calls), which at
+Gemini's published Flash / Flash-Lite rates is well under a cent per call — see
+the [pricing page](https://ai.google.dev/gemini-api/docs/pricing). Logging
+`usage_metadata` per call is the clean next step for an exact figure.
+
+**Human time per task — not measured.** No real compliance reviewer was timed
+against either the baseline or the agent's output in this evaluation, so we make
+no human-time-saving claim. That is a disclosed gap, and a reasonable next step
+for a future, user-involved study.
+
 ### Offline mode is a smoke test, not a second result
 
 The pipeline also runs with **no API key**, via a deterministic pattern-matcher
