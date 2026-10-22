@@ -95,6 +95,13 @@ def main(argv=None) -> int:
         transcripts = [result.transcript]
     elif args.call:
         path = os.path.join(REPO_ROOT, "data", "transcripts", f"{args.call}.json")
+        if not os.path.exists(path):
+            # Unscored qualitative sets live in subfolders (e.g. nigeria/) so
+            # the eval's top-level glob never loads them.
+            import glob
+            matches = glob.glob(os.path.join(REPO_ROOT, "data", "transcripts", "*", f"{args.call}.json"))
+            if matches:
+                path = matches[0]
         transcripts = [load_transcript(path)]
     else:
         transcripts = load_all_transcripts()

@@ -1,0 +1,19 @@
+{
+  "id": "ng_02",
+  "lines": [
+    {"line": 1, "speaker": "Agent", "text": "Good morning, you're welcome to Harmattan Microfinance Bank. This call may be recorded for quality and compliance purposes. My name is Funmi."},
+    {"line": 2, "speaker": "Customer", "text": "Good morning. I applied for the SME loan for my provisions shop, I wan know the terms."},
+    {"line": 3, "speaker": "Agent", "text": "No problem. Before we go further, please confirm the last four digits of your BVN and your date of birth."},
+    {"line": 4, "speaker": "Customer", "text": "BVN ends in 4471, date of birth 14 March 1988."},
+    {"line": 5, "speaker": "Agent", "text": "Thank you, Madam Aisha, you're verified. You've been approved for ₦500,000 over six months, interest at 4% flat per month."},
+    {"line": 6, "speaker": "Customer", "text": "Okay. So wetin I go dey pay every month?"},
+    {"line": 7, "speaker": "Agent", "text": "About ₦103,000 monthly. Honestly ma, I can only hold this approval until we end this call. If you drop, e don go."},
+    {"line": 8, "speaker": "Customer", "text": "Ehen, okay, let's do it. I accept."},
+    {"line": 9, "speaker": "Agent", "text": "Wonderful, I've booked it. You'll receive ₦455,000 in your account within the hour."},
+    {"line": 10, "speaker": "Customer", "text": "₦455,000? I thought na ₦500,000?"},
+    {"line": 11, "speaker": "Agent", "text": "Yes ma, there's a 7.5% management fee and 1.5% credit life insurance, deducted upfront. That one na standard."},
+    {"line": 12, "speaker": "Customer", "text": "Nobody tell me that one before. I no happy at all."},
+    {"line": 13, "speaker": "Agent", "text": "E dey for the terms and conditions, ma. Anything else?"},
+    {"line": 14, "speaker": "Customer", "text": "No, that's all."}
+  ]
+}

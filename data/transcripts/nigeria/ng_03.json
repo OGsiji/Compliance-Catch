@@ -1,0 +1,16 @@
+{
+  "id": "ng_03",
+  "lines": [
+    {"line": 1, "speaker": "Agent", "text": "Good evening, na Tunde from Kolanut Credit. Make I tell you say we dey record this call for quality and compliance."},
+    {"line": 2, "speaker": "Customer", "text": "Okay, no wahala."},
+    {"line": 3, "speaker": "Agent", "text": "Before I talk anything about account, abeg confirm your full name and the phone number wey you use register."},
+    {"line": 4, "speaker": "Customer", "text": "Ngozi Eze, 0803 555 0192."},
+    {"line": 5, "speaker": "Agent", "text": "Thank you, Ngozi, you don verify. Your repayment of ₦40,000 don pass due by five days."},
+    {"line": 6, "speaker": "Customer", "text": "I know. My mama die last week, I just come back from burial. Money no dey hand now."},
+    {"line": 7, "speaker": "Agent", "text": "Ah, sorry for your loss, I mean am. We no go rush you. We fit pause the late fee for 30 days, and if you want, you fit bring your husband or anybody wey you trust join the call."},
+    {"line": 8, "speaker": "Customer", "text": "Thank you. Make we do the 30 days."},
+    {"line": 9, "speaker": "Agent", "text": "I don put am. Nobody go call your contacts, and if you get any complaint about how we treat you, call our complaints line on 0700-KOLANUT or email complaints@kolanut.example."},
+    {"line": 10, "speaker": "Customer", "text": "Okay, God bless you."},
+    {"line": 11, "speaker": "Agent", "text": "Take care, Ngozi. Sorry again."}
+  ]
+}

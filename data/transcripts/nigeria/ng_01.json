@@ -1,0 +1,18 @@
+{
+  "id": "ng_01",
+  "lines": [
+    {"line": 1, "speaker": "Agent", "text": "Good afternoon, na Chidi I be, calling from Kolanut Credit. Abeg, I fit speak with Mr. Emeka Okafor?"},
+    {"line": 2, "speaker": "Customer", "text": "Na me. Wetin happen?"},
+    {"line": 3, "speaker": "Agent", "text": "Oga Emeka, your loan of ₦85,000 don pass due date by twelve days. The balance now with penalty na ₦97,400."},
+    {"line": 4, "speaker": "Customer", "text": "Ah, I know say I owe. But my brother, I lost my work since March, things hard well well. I dey try."},
+    {"line": 5, "speaker": "Agent", "text": "Everybody dey talk say things hard. If you no pay this one by 6pm today, we go send your name and picture to everybody for your contact list say you be debtor."},
+    {"line": 6, "speaker": "Customer", "text": "Abeg no do that, my oga for work go see am."},
+    {"line": 7, "speaker": "Agent", "text": "Then make you pay. I fit even report you to police, dem go come carry you from your house."},
+    {"line": 8, "speaker": "Customer", "text": "Police? For loan? I no fit pay everything today, abeg."},
+    {"line": 9, "speaker": "Agent", "text": "Okay, see, make I help you. We get top-up loan of ₦150,000, you fit collect am today, clear this one, and the rest go help you for house."},
+    {"line": 10, "speaker": "Customer", "text": "Another loan? Hmm. How much be the interest?"},
+    {"line": 11, "speaker": "Agent", "text": "No worry about interest now, just accept am for the app before 6pm."},
+    {"line": 12, "speaker": "Customer", "text": "Make I think am first."},
+    {"line": 13, "speaker": "Agent", "text": "Think fast o."}
+  ]
+}
