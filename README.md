@@ -4,6 +4,9 @@ A two-stage LLM agent that reviews financial-services call transcripts for
 compliance violations and **grounds every flag it reports** against the source
 text and the specific rule it cites.
 
+> **IndabaX Nigeria 2026 · Poster Fair** (22–23 October, Olabisi Onabanjo
+> University). Here from the QR code? [View the poster (PDF)](docs/indabax-nigeria-2026-poster.pdf).
+
 ## Who this is for — and the bottleneck
 
 Compliance and QA teams at banks, lenders, and insurers have to check call-center
